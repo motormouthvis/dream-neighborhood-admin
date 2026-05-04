@@ -1,30 +1,25 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Home, Map, FileText, BarChart3, Users, CreditCard, HelpCircle, Settings, Plus, Search, Bell, Copy, Check, Zap, Globe, Eye, TrendingUp, Target, Award, Shield } from 'lucide-react';
+import { Map, FileText, Users, CreditCard, HelpCircle, Settings, Search, Bell, Copy, Check, Zap, Globe, Eye, TrendingUp, Target, Award, Shield, ChevronDown, ChevronRight, Calendar, PlayCircle, ExternalLink, BarChart3 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function DreamNeighborhood() {
   const [activeTab, setActiveTab] = useState('self-serve');
-  const [domain, setDomain] = useState('yourwebsite.com');
-  const [snippet, setSnippet] = useState('');
   const [copied, setCopied] = useState(false);
-  const [showSnippet, setShowSnippet] = useState(false);
-
-  // Persistent subscription status (Realty Candy partner example)
-  const subscriptionStatus = {
-    plan: "Professional",
-    partner: "Realty Candy",
-    discount: "50% off first month",
-    daysLeft: 11,
-    status: "active"
-  };
+  const [advancedOpen, setAdvancedOpen] = useState(false);
 
   // Static script - same for all customers
   const staticScript = `<script src="https://cdn.dreamneighborhood.com/popup.js" async></script>`;
+
+  const copyScript = () => {
+    navigator.clipboard.writeText(staticScript);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const getTabTitle = () => {
     switch (activeTab) {
@@ -34,6 +29,7 @@ export default function DreamNeighborhood() {
       case 'reports': return 'Reports';
       case 'leads': return 'Leads';
       case 'subscription': return 'Subscription';
+      case 'team-settings': return 'Team Settings';
       default: return 'Dashboard';
     }
   };
@@ -116,57 +112,157 @@ export default function DreamNeighborhood() {
     </div>
   );
 
-  const SubscriptionStatusBar = () => (
-    <div className="bg-[#0A6B5F] text-white px-8 py-3 flex items-center justify-between text-sm border-b border-white/20">
-      <div className="flex items-center gap-8">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-          <span className="font-medium">Active Subscription</span>
-        </div>
-        <div className="text-emerald-200 text-xs">
-          11 days left in trial
-        </div>
-      </div>
-      <Button size="sm" variant="secondary" className="bg-white/10 hover:bg-white/20 text-white text-xs h-8 px-5 border-0">
-        Manage Subscription
-      </Button>
-    </div>
-  );
-
   const renderContent = () => {
     switch (activeTab) {
       case 'self-serve':
         return (
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-8">
-              <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-1 rounded-3xl mb-3 text-sm">
-                <Zap className="w-4 h-4" />
+          <div className="max-w-6xl mx-auto">
+            <div className="mb-6">
+              <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-3xl mb-2 text-xs font-medium">
+                <Zap className="w-3.5 h-3.5" />
                 SELF-SERVE
               </div>
-              <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight">Install Popup in &lt; 5 mins</h1>
-              <p className="text-zinc-600 mt-2 text-base">Add this single line of code to your website. Same script for all customers. No customization needed.</p>
+              <h1 className="text-2xl font-semibold text-zinc-900 tracking-tight">Get your popup live</h1>
+              <p className="text-zinc-500 text-sm mt-1">Install in under 5 minutes. Same simple script for every site.</p>
             </div>
 
-            <Card className="shadow border-emerald-100 max-w-2xl">
-              <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white">
-                <CardTitle className="text-white flex items-center gap-3">
-                  <Zap className="w-6 h-6" />
-                  Standard Installation Code
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-8">
-                <div className="bg-zinc-950 text-emerald-300 p-6 rounded-2xl font-mono text-sm mb-8 border border-emerald-900">
-                  {staticScript}
-                </div>
-                <p className="text-xs text-zinc-500 mb-8">Paste this script before the closing &lt;/body&gt; tag on every page.</p>
-                
-                <Button className="w-full h-12 bg-emerald-600 hover:bg-emerald-700 text-base rounded-2xl">
-                  Subscribe Now
-                </Button>
-              </CardContent>
-            </Card>
+            <div className="grid grid-cols-12 gap-5">
+              {/* COLUMN 1 */}
+              <div className="col-span-12 lg:col-span-7 space-y-5">
+                {/* Subscription Status Box */}
+                <Card className="border-emerald-200 shadow-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        <span className="text-sm font-semibold text-zinc-900">Subscription</span>
+                        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium">ACTIVE</span>
+                      </div>
+                      <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs h-8 rounded-xl px-4">
+                        Manage Subscription
+                      </Button>
+                    </div>
+                    <div className="grid grid-cols-3 gap-3 text-xs">
+                      <div className="p-3 bg-emerald-50 rounded-xl">
+                        <div className="text-zinc-500">Billing</div>
+                        <div className="font-semibold text-zinc-900 mt-0.5">Monthly</div>
+                      </div>
+                      <div className="p-3 bg-emerald-50 rounded-xl">
+                        <div className="text-zinc-500">Next Amount</div>
+                        <div className="font-semibold text-zinc-900 mt-0.5">$74.50</div>
+                      </div>
+                      <div className="p-3 bg-emerald-50 rounded-xl">
+                        <div className="text-zinc-500">Next Date</div>
+                        <div className="font-semibold text-zinc-900 mt-0.5">Jun 4, 2026</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <BenefitsSection />
+                {/* Snippet + Copy */}
+                <Card className="border-emerald-200 shadow-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="text-sm font-semibold text-zinc-900">Installation Script</div>
+                      <button onClick={copyScript} className="flex items-center gap-1.5 text-xs text-emerald-700 hover:text-emerald-800 font-medium">
+                        {copied ? <><Check className="w-3.5 h-3.5" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
+                      </button>
+                    </div>
+                    <div className="bg-zinc-950 text-emerald-300 p-3 rounded-xl font-mono text-[11px] border border-emerald-900 overflow-auto">
+                      {staticScript}
+                    </div>
+                    <p className="text-[11px] text-zinc-500 mt-2">Paste before closing &lt;/body&gt; tag.</p>
+                  </CardContent>
+                </Card>
+
+                {/* Book a meeting */}
+                <Card className="border-emerald-200 shadow-sm bg-gradient-to-br from-emerald-50 to-white">
+                  <CardContent className="p-5 flex items-center gap-4">
+                    <div className="w-11 h-11 bg-emerald-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-sm text-zinc-900">Need help installing?</div>
+                      <div className="text-xs text-zinc-600">Book a free 15-minute call — we'll install it for you.</div>
+                    </div>
+                    <Button size="sm" className="bg-emerald-600 hover:bg-emerald-700 text-xs h-9 rounded-xl px-4 flex-shrink-0">
+                      Book Meeting
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Platform-specific instructions */}
+                <Card className="border-emerald-200 shadow-sm">
+                  <CardContent className="p-5">
+                    <div className="text-sm font-semibold text-zinc-900 mb-3">Platform Instructions</div>
+                    <div className="grid grid-cols-3 gap-2">
+                      {[
+                        { name: "Squarespace", url: "#" },
+                        { name: "Wix", url: "#" },
+                        { name: "WordPress", url: "#" },
+                        { name: "Webflow", url: "#" },
+                        { name: "Shopify", url: "#" },
+                        { name: "Other CMS", url: "#" },
+                      ].map((p) => (
+                        <a key={p.name} href={p.url} className="flex items-center justify-between p-2.5 border border-zinc-200 rounded-xl text-xs text-zinc-700 hover:border-emerald-300 hover:bg-emerald-50 transition-colors">
+                          <span className="font-medium">{p.name}</span>
+                          <ExternalLink className="w-3 h-3 text-zinc-400" />
+                        </a>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              {/* COLUMN 2 */}
+              <div className="col-span-12 lg:col-span-5 space-y-5">
+                {/* Video demo */}
+                <Card className="border-emerald-200 shadow-sm overflow-hidden">
+                  <a href="#" className="block group">
+                    <div className="aspect-video bg-gradient-to-br from-emerald-700 to-teal-800 relative flex items-center justify-center">
+                      <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] [background-size:18px]"></div>
+                      <div className="relative w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <PlayCircle className="w-10 h-10 text-emerald-600" strokeWidth={1.5} />
+                      </div>
+                      <div className="absolute bottom-3 left-4 text-white text-xs font-medium">2:14 video</div>
+                    </div>
+                    <div className="p-4 flex items-center justify-between">
+                      <div>
+                        <div className="font-semibold text-sm text-zinc-900">Watch Demo</div>
+                        <div className="text-xs text-zinc-500">See Dream Neighborhood in action</div>
+                      </div>
+                      <ChevronRight className="w-4 h-4 text-zinc-400" />
+                    </div>
+                  </a>
+                </Card>
+
+                {/* Benefits list */}
+                <Card className="border-emerald-200 shadow-sm">
+                  <CardContent className="p-5">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Shield className="w-4 h-4 text-emerald-600" />
+                      <div className="text-sm font-semibold text-zinc-900">Subscription Benefits</div>
+                    </div>
+                    <div className="space-y-3">
+                      {benefits.map((b, i) => (
+                        <div key={i} className="flex items-start gap-3 pb-3 border-b last:border-0 last:pb-0 border-emerald-50">
+                          <div className="w-7 h-7 bg-emerald-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                            {React.cloneElement(b.icon, { className: "w-4 h-4 text-emerald-600" })}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="text-xs font-semibold text-zinc-900 leading-tight">{b.title}</div>
+                              <div className="text-[11px] font-mono font-bold text-emerald-600 flex-shrink-0">{b.stat}</div>
+                            </div>
+                            <p className="text-[11px] text-zinc-500 leading-snug mt-0.5 line-clamp-2">{b.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
           </div>
         );
 
@@ -401,6 +497,19 @@ export default function DreamNeighborhood() {
           </div>
         );
 
+      case 'team-settings':
+        return (
+          <div className="max-w-4xl mx-auto">
+            <h1 className="text-2xl font-semibold text-zinc-900 mb-1">Team Settings</h1>
+            <p className="text-zinc-500 text-sm mb-6">Manage team members, roles, and notification preferences.</p>
+            <Card className="border-emerald-200">
+              <CardContent className="p-6">
+                <div className="text-sm text-zinc-600">Team members, roles, billing seats, and notification preferences will appear here.</div>
+              </CardContent>
+            </Card>
+          </div>
+        );
+
       default:
         return <div className="p-20 text-center text-zinc-400">Select a tab from the menu</div>;
     }
@@ -440,30 +549,40 @@ export default function DreamNeighborhood() {
               <span className="ml-auto text-[10px] px-2.5 py-px bg-emerald-400/30 text-emerald-100 rounded text-xs">Partner</span>
             </button>
 
-            <div className="px-5 mt-8 mb-3 text-xs uppercase tracking-widest text-emerald-200/70">Advanced</div>
-            
-            <button onClick={() => setActiveTab('reports')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'reports' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
-              <FileText className="w-5 h-5" />
-              Reports
+            <button
+              onClick={() => setAdvancedOpen(!advancedOpen)}
+              className="w-full flex items-center gap-3 px-5 py-3 mt-6 rounded-2xl text-left text-xs uppercase tracking-widest text-emerald-200/80 hover:bg-white/5 hover:text-emerald-100 transition-colors"
+            >
+              <ChevronDown className={`w-4 h-4 transition-transform ${advancedOpen ? '' : '-rotate-90'}`} />
+              Advanced
             </button>
-            <button onClick={() => setActiveTab('leads')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'leads' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
-              <Users className="w-5 h-5" />
-              Leads
-            </button>
-            <button onClick={() => setActiveTab('subscription')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'subscription' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
-              <CreditCard className="w-5 h-5" />
-              Subscription
-            </button>
+
+            {advancedOpen && (
+              <div className="space-y-1 mt-1">
+                <button onClick={() => setActiveTab('reports')} className={`w-full flex items-center gap-3 px-5 py-[12px] rounded-2xl text-left text-sm font-medium ${activeTab === 'reports' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
+                  <FileText className="w-4 h-4" />
+                  Reports
+                </button>
+                <button onClick={() => setActiveTab('leads')} className={`w-full flex items-center gap-3 px-5 py-[12px] rounded-2xl text-left text-sm font-medium ${activeTab === 'leads' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
+                  <Users className="w-4 h-4" />
+                  Leads
+                </button>
+                <button onClick={() => setActiveTab('subscription')} className={`w-full flex items-center gap-3 px-5 py-[12px] rounded-2xl text-left text-sm font-medium ${activeTab === 'subscription' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
+                  <CreditCard className="w-4 h-4" />
+                  Subscription
+                </button>
+                <button onClick={() => setActiveTab('team-settings')} className={`w-full flex items-center gap-3 px-5 py-[12px] rounded-2xl text-left text-sm font-medium ${activeTab === 'team-settings' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
+                  <Settings className="w-4 h-4" />
+                  Team Settings
+                </button>
+              </div>
+            )}
           </nav>
 
           <div className="px-8 mt-12 text-xs uppercase tracking-widest text-emerald-200 mb-4">COMMUNITY</div>
           <button className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left hover:bg-white/10 text-white text-sm font-medium">
             <HelpCircle className="w-5 h-5" />
             Help & Support
-          </button>
-          <button onClick={() => setActiveTab('subscription')} className={`w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left hover:bg-white/10 text-white text-sm font-medium ${activeTab === 'subscription' ? 'bg-white text-[#0A6B5F]' : ''}`}>
-            <Settings className="w-5 h-5" />
-            Team Settings
           </button>
         </div>
 
@@ -505,11 +624,8 @@ export default function DreamNeighborhood() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden bg-zinc-50">
-          <SubscriptionStatusBar />
-          <div className="flex-1 p-6 overflow-auto">
-            {renderContent()}
-          </div>
+        <div className="flex-1 overflow-auto bg-zinc-50 p-6">
+          {renderContent()}
         </div>
       </div>
     </div>
