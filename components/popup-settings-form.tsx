@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Settings2, ChevronLeft } from "lucide-react";
+import { Settings2, ChevronLeft, Zap, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+const STATIC_SCRIPT = `<script src="https://app.dreamneighborhood.com/explorer/sdk.js" async></script>`;
 
 const dataPoints = [
   {
@@ -81,6 +83,13 @@ export default function PopupSettingsForm() {
   );
   const [onlyDetectedAddress, setOnlyDetectedAddress] = useState(true);
   const [searchPageForAddress, setSearchPageForAddress] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const copyScript = () => {
+    navigator.clipboard.writeText(STATIC_SCRIPT);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const addTag = () => {
     const v = tagInput.trim();
@@ -106,9 +115,56 @@ export default function PopupSettingsForm() {
           <h1 className="text-2xl font-semibold text-zinc-900 tracking-tight">
             Customize Your Popup
           </h1>
-          <p className="text-zinc-500 text-sm">Configure how the Dream Neighborhood widget looks and behaves.</p>
+          <p className="text-zinc-500 text-sm">
+            Configure how the Dream Neighborhood widget looks and behaves.
+          </p>
         </div>
       </div>
+
+      {/* One-time installation script */}
+      <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-emerald-50/40 via-white to-emerald-50/40 mb-5">
+        <CardContent className="p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
+                <Zap className="w-3.5 h-3.5" />
+              </div>
+              <div>
+                <div className="text-sm font-semibold text-zinc-900">
+                  One-time installation script
+                </div>
+                <div className="text-[11px] text-zinc-500">
+                  Install this once. Settings below update automatically.
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={copyScript}
+              className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+                copied
+                  ? "bg-emerald-100 text-emerald-700"
+                  : "bg-emerald-600 text-white hover:bg-emerald-700"
+              }`}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3.5 h-3.5" /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" /> Copy
+                </>
+              )}
+            </button>
+          </div>
+          <div className="bg-white border border-emerald-100 rounded-xl px-4 py-3 font-mono text-[11px] text-emerald-900 overflow-auto shadow-inner">
+            {STATIC_SCRIPT}
+          </div>
+          <p className="text-[11px] text-zinc-500 mt-2">
+            Paste before the closing &lt;/body&gt; tag on every page.
+          </p>
+        </CardContent>
+      </Card>
 
       {/* Explorer settings */}
       <Card className="border border-emerald-100 shadow-sm mb-5">

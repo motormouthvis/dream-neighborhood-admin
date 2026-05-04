@@ -132,72 +132,69 @@ export default function SelfServeContent() {
             </CardContent>
           </Card>
 
-          {/* Snippet box — light, shaded */}
-          <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-emerald-50/40 via-white to-emerald-50/40 overflow-hidden">
+          {/* Combined: Customize Popup + Installation Script (one-time) */}
+          <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-white via-emerald-50/30 to-emerald-50/50 overflow-hidden">
             <CardContent className="p-5">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
-                    <Zap className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md">
+                  <Settings2 className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-sm text-zinc-900">
+                    Customize your popup
                   </div>
-                  <div>
-                    <div className="text-sm font-semibold text-zinc-900">
-                      Installation Script
-                    </div>
-                    <div className="text-[11px] text-zinc-500">
-                      Same code for every customer
-                    </div>
+                  <div className="text-xs text-zinc-600">
+                    Default address, accent color, data shown, lead form, position, tooltip,
+                    and more.
                   </div>
                 </div>
-                <button
-                  onClick={copyScript}
-                  className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors ${
-                    copied
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-emerald-600 text-white hover:bg-emerald-700"
-                  }`}
+                <Link
+                  href="/popup-settings"
+                  className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
                 >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" /> Copied
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" /> Copy
-                    </>
-                  )}
-                </button>
+                  Edit Popup <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-              <div className="bg-white border border-emerald-100 rounded-xl px-4 py-3 font-mono text-[11px] text-emerald-900 overflow-auto shadow-inner">
-                {STATIC_SCRIPT}
-              </div>
-              <p className="text-[11px] text-zinc-500 mt-2">
-                Paste before the closing &lt;/body&gt; tag on every page.
-              </p>
-            </CardContent>
-          </Card>
 
-          {/* NEW: Edit Popup Settings card */}
-          <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-white to-emerald-50/40 overflow-hidden">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md">
-                <Settings2 className="w-5 h-5" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm text-zinc-900">
-                  Customize your popup
+              <div className="mt-4 pt-4 border-t border-emerald-100/80">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-3.5 h-3.5 text-emerald-600" />
+                    <div className="text-xs font-semibold text-zinc-900">
+                      One-time installation script
+                    </div>
+                    <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-medium">
+                      Install once
+                    </span>
+                  </div>
+                  <button
+                    onClick={copyScript}
+                    className={`flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+                      copied
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50"
+                    }`}
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" /> Copy
+                      </>
+                    )}
+                  </button>
                 </div>
-                <div className="text-xs text-zinc-600">
-                  Default address, accent color, data shown, lead form, position, tooltip
-                  message, and more.
+                <div className="bg-white border border-emerald-100 rounded-xl px-4 py-2.5 font-mono text-[11px] text-emerald-900 overflow-auto shadow-inner">
+                  {STATIC_SCRIPT}
                 </div>
+                <p className="text-[10px] text-zinc-500 mt-2">
+                  Paste before the closing &lt;/body&gt; tag on every page. After install,
+                  edits to your popup settings update automatically — no need to change the
+                  script.
+                </p>
               </div>
-              <Link
-                href="/popup-settings"
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
-              >
-                Edit Popup <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
             </CardContent>
           </Card>
 
