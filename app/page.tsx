@@ -14,10 +14,10 @@ export default function DreamNeighborhood() {
   const [copied, setCopied] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
 
-  // Persistent subscription status (Ralty Candy partner example)
+  // Persistent subscription status (Realty Candy partner example)
   const subscriptionStatus = {
     plan: "Professional",
-    partner: "Ralty Candy",
+    partner: "Realty Candy",
     discount: "50% off first month",
     daysLeft: 11,
     status: "active"
@@ -37,14 +37,13 @@ export default function DreamNeighborhood() {
 
   const getTabTitle = () => {
     switch (activeTab) {
-      case 'self-serve': return 'Self-Serve Getting Started';
-      case 'partners': return 'Partners Getting Started';
-      case 'explorer': return 'Neighborhood Explorer';
-      case 'reports': return 'Manage Reports';
-      case 'explorers': return 'Manage Explorers';
+      case 'self-serve': return 'Getting Started — Self Serve';
+      case 'partners': return 'Getting Started — Partner';
+      case 'explorer': return 'View Popup Sample';
+      case 'reports': return 'Reports';
       case 'leads': return 'Leads';
-      case 'subscription': return 'Subscription & Benefits';
-      default: return 'Get Started';
+      case 'subscription': return 'Subscription';
+      default: return 'Dashboard';
     }
   };
 
@@ -249,7 +248,7 @@ export default function DreamNeighborhood() {
                 <Card className="shadow border-amber-200 overflow-hidden">
                   <CardHeader className="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-8">
                     <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-white/20 rounded-3xl flex items-center justify-center text-4xl">🍭</div>
+                      <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl">🏠</div>
                     </div>
                     <CardTitle className="text-center text-3xl">Ralty Candy</CardTitle>
                     <p className="text-center text-amber-100 mt-2">Premier Integration Partner</p>
@@ -261,8 +260,8 @@ export default function DreamNeighborhood() {
                       <p className="text-zinc-600 mt-3">Activate now to access Neighborhood Explorer, AI leads, reports, and all subscription benefits.</p>
                     </div>
                     
-                    <Button className="w-full h-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-lg rounded-2xl mb-6">
-                      Activate Full Experience
+                    <Button className="w-full h-11 bg-emerald-600 hover:bg-emerald-700 text-base rounded-2xl mb-6">
+                      Subscribe Now
                     </Button>
                     
                     <div className="text-center text-xs text-zinc-500">
@@ -274,21 +273,20 @@ export default function DreamNeighborhood() {
 
               <div className="col-span-12 lg:col-span-5">
                 <Card className="h-full border-emerald-100">
-                  <CardHeader>
-                    <CardTitle className="text-lg">Partner Perks</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-5 text-sm">
-                    <div className="flex gap-3 text-zinc-600">
-                      <div className="text-xl mt-px">🏗️</div>
-                      <div>Seamless integration already completed</div>
-                    </div>
-                    <div className="flex gap-3 text-zinc-600">
-                      <div className="text-xl mt-px">📈</div>
-                      <div>Immediate access to all premium analytics</div>
-                    </div>
-                    <div className="flex gap-3 text-zinc-600">
-                      <div className="text-xl mt-px">💰</div>
-                      <div className="font-medium">50% discount applied for first month</div>
+                  <CardContent className="p-6 pt-8">
+                    <div className="space-y-5 text-sm">
+                      <div className="flex gap-3">
+                        <div>🏗️</div>
+                        <div className="text-zinc-600">Popup already embedded by Realty Candy</div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div>📈</div>
+                        <div className="text-zinc-600">Full analytics &amp; explorer unlocked on subscribe</div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div>💰</div>
+                        <div className="font-medium text-emerald-700">50% off first month applied</div>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -492,29 +490,26 @@ export default function DreamNeighborhood() {
 
         <div className="mt-8 px-3 flex-1 overflow-auto">
           <nav className="space-y-1 px-3">
-            {/* Self-Serve Getting Started */}
             <button onClick={() => setActiveTab('self-serve')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'self-serve' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
               <Zap className="w-5 h-5" />
               Getting Started
-              <span className="ml-auto text-[10px] px-2.5 py-px bg-emerald-400/20 text-emerald-200 rounded-full text-xs">SELF-SERVE</span>
+              <span className="ml-auto text-[10px] px-2.5 py-px bg-emerald-400/30 text-emerald-100 rounded text-xs">Self Serve</span>
             </button>
-            {/* Partners Getting Started */}
             <button onClick={() => setActiveTab('partners')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'partners' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
               <Users className="w-5 h-5" />
               Getting Started
-              <span className="ml-auto text-[10px] px-2.5 py-px bg-amber-400/20 text-amber-200 rounded-full text-xs">PARTNERS</span>
+              <span className="ml-auto text-[10px] px-2.5 py-px bg-emerald-400/30 text-emerald-100 rounded text-xs">Partner</span>
             </button>
-            <button onClick={() => setActiveTab('explorer')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'explorer' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
+
+            <div className="px-5 mt-8 mb-3 text-xs uppercase tracking-widest text-emerald-200/70">Advanced</div>
+            
+            <button onClick={() => setActiveTab('explorer')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${['explorer','explorers'].includes(activeTab) ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
               <Map className="w-5 h-5" />
-              Neighborhood Explorer
+              View Popup Sample
             </button>
             <button onClick={() => setActiveTab('reports')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'reports' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
               <FileText className="w-5 h-5" />
-              Manage Reports
-            </button>
-            <button onClick={() => setActiveTab('explorers')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'explorers' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
-              <BarChart3 className="w-5 h-5" />
-              Manage Explorers
+              Reports
             </button>
             <button onClick={() => setActiveTab('leads')} className={`w-full flex items-center gap-3 px-5 py-[14px] rounded-2xl text-left text-sm font-medium ${activeTab === 'leads' ? 'bg-white text-[#0A6B5F]' : 'hover:bg-white/10'}`}>
               <Users className="w-5 h-5" />
