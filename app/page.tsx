@@ -220,7 +220,7 @@ export default function DreamNeighborhood() {
                   <CardContent className="p-6 text-center">
                     <div className="text-emerald-600 text-xs font-medium tracking-widest mb-4">YOUR SUBSCRIPTION STATUS</div>
                     <div className="text-4xl font-semibold text-zinc-900 mb-1">Active</div>
-                    <div className="text-emerald-600">Professional via Ralty Candy • 50% off month 1</div>
+                    <div className="text-emerald-600">Professional via Realty Candy • 50% off month 1</div>
                     <div className="mt-8 text-xs text-zinc-500">11 days remaining in trial</div>
                   </CardContent>
                 </Card>
@@ -239,7 +239,7 @@ export default function DreamNeighborhood() {
                 <Users className="w-4 h-4" />
                 PARTNER
               </div>
-              <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight">Ralty Candy Partnership</h1>
+              <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight">Realty Candy Partnership</h1>
               <p className="text-zinc-600 mt-1">Your partner has embedded the popup. Activate to unlock full features.</p>
             </div>
 
@@ -250,7 +250,7 @@ export default function DreamNeighborhood() {
                     <div className="flex justify-center mb-6">
                       <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-3xl flex items-center justify-center text-4xl">🏠</div>
                     </div>
-                    <CardTitle className="text-center text-3xl">Ralty Candy</CardTitle>
+                    <CardTitle className="text-center text-3xl">Realty Candy</CardTitle>
                     <p className="text-center text-amber-100 mt-2">Premier Integration Partner</p>
                   </CardHeader>
                   <CardContent className="p-8">
@@ -265,7 +265,7 @@ export default function DreamNeighborhood() {
                     </Button>
                     
                     <div className="text-center text-xs text-zinc-500">
-                      Special offer from Ralty Candy • Trial extended if needed
+                      Special offer from Realty Candy • Trial extended if needed
                     </div>
                   </CardContent>
                 </Card>
@@ -351,7 +351,7 @@ export default function DreamNeighborhood() {
           <div className="max-w-5xl mx-auto">
             <div className="mb-6">
               <h1 className="text-3xl font-semibold tracking-tight">Performance Reports</h1>
-              <p className="text-sm text-zinc-500">Real-time metrics powered by your Ralty Candy partnership</p>
+              <p className="text-sm text-zinc-500">Real-time metrics powered by your Realty Candy partnership</p>
             </div>
             
             <div className="grid grid-cols-3 gap-4 mb-8">
@@ -433,7 +433,7 @@ export default function DreamNeighborhood() {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8 text-center">
               <div className="inline-flex px-4 py-1 bg-emerald-100 text-emerald-700 rounded-3xl text-sm font-medium mb-3">CURRENT PLAN</div>
-              <h1 className="text-3xl font-semibold">Professional • via Ralty Candy</h1>
+              <h1 className="text-3xl font-semibold">Professional • via Realty Candy</h1>
               <p className="text-emerald-600 mt-1">50% off first month • 11 days remaining</p>
             </div>
             
