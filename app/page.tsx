@@ -10,13 +10,14 @@ import {
   Bell, 
   Search, 
   Plus,
-  MapPin
+  MapPin,
+  Code2,
+  Zap
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -25,279 +26,247 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
 
 const navigation = [
-  { name: "Dashboard", href: "#", icon: Home, current: true },
-  { name: "Listings", href: "#", icon: Building2, current: false },
-  { name: "Neighborhoods", href: "#", icon: MapPin, current: false },
+  { name: "Popup Setup", href: "#", icon: Code2, current: true },
   { name: "Analytics", href: "#", icon: BarChart3, current: false },
-  { name: "Customers", href: "#", icon: Users, current: false },
-  { name: "Settings", href: "#", icon: Settings, current: false },
-];
-
-const stats = [
-  { name: "Active Listings", value: "247", change: "+12%", trend: "up" },
-  { name: "Neighborhoods", value: "18", change: "+3", trend: "up" },
-  { name: "Monthly Views", value: "48.2k", change: "+18%", trend: "up" },
-  { name: "Conversion Rate", value: "3.8%", change: "-0.4%", trend: "down" },
-];
-
-const recentListings = [
-  { id: "1", address: "6165 Isla St, Melbourne, FL", status: "Live", price: "$589,000", views: "1,284" },
-  { id: "2", address: "3309 N Indian River Dr, St. Lucie Village", status: "Live", price: "$1,250,000", views: "942" },
-  { id: "3", address: "5 Harbour Isle Dr E, Fort Pierce", status: "Pending", price: "$725,000", views: "673" },
-];
-
-const performanceData = [
-  { month: "Jan", views: 12400, leads: 87 },
-  { month: "Feb", views: 15800, leads: 124 },
-  { month: "Mar", views: 19200, leads: 156 },
-  { month: "Apr", views: 23100, leads: 203 },
-  { month: "May", views: 27400, leads: 241 },
+  { name: "Neighborhoods", href: "#", icon: MapPin, current: false },
+  { name: "Advanced", href: "#", icon: Settings, current: false },
 ];
 
 export default function AdminDashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [clientType, setClientType] = useState<"selfserve" | "partner">("selfserve");
+  const [domain, setDomain] = useState("");
+  const [snippetGenerated, setSnippetGenerated] = useState(false);
+
+  const generatedSnippet = domain 
+    ? `<script src="https://cdn.dreamneighborhood.com/widget.js" data-domain="${domain}" async></script>`
+    : "";
+
+  const handleGenerateSnippet = () => {
+    if (domain) {
+      setSnippetGenerated(true);
+    }
+  };
 
   return (
-    <div className="flex h-screen bg-zinc-950 text-zinc-100 overflow-hidden">
-      {/* Sidebar */}
-      <div className="hidden lg:flex lg:w-72 lg:flex-col lg:fixed lg:inset-y-0 bg-zinc-900 border-r border-zinc-800">
-        <div className="flex h-16 items-center gap-3 border-b border-zinc-800 px-8">
-          <img src="/logo.png" alt="Dream Neighborhood" className="h-9 w-auto" />
-          <div>
-            <div className="font-semibold tracking-tight">Dream Neighborhood</div>
-            <div className="text-[10px] text-emerald-400 -mt-1">ADMIN PANEL</div>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      {/* Top Nav */}
+      <nav className="border-b border-zinc-800 bg-zinc-900 px-8 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center">
+              <Zap className="w-5 h-5 text-white" />
+            </div>
+            <div>
+              <div className="font-semibold text-xl tracking-tight">Dream Neighborhood</div>
+              <div className="text-[10px] text-emerald-400 -mt-1">POPUP WIDGET ADMIN</div>
+            </div>
           </div>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-3 py-6">
-          <nav className="space-y-1 px-3">
+        <div className="flex items-center gap-8 text-sm">
+          <div className="flex gap-8">
+            <button 
+              onClick={() => setClientType("selfserve")}
+              className={`pb-1 border-b-2 transition-colors ${clientType === 'selfserve' ? 'border-emerald-500 text-white' : 'border-transparent text-zinc-400 hover:text-zinc-200'}`}
+            >
+              Self-Serve Customers
+            </button>
+            <button 
+              onClick={() => setClientType("partner")}
+              className={`pb-1 border-b-2 transition-colors ${clientType === 'partner' ? 'border-emerald-500 text-white' : 'border-transparent text-zinc-400 hover:text-zinc-200'}`}
+            >
+              Partner Clients
+            </button>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <Avatar className="h-8 w-8">
+              <AvatarFallback className="bg-emerald-600 text-xs">WM</AvatarFallback>
+            </Avatar>
+            <div>
+              <div className="text-sm font-medium">William Miller</div>
+              <div className="text-xs text-emerald-400">Founder</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="w-72 bg-zinc-900 border-r border-zinc-800 h-[calc(100vh-73px)] p-6 flex-shrink-0">
+          <div className="uppercase text-xs tracking-widest text-zinc-500 mb-4 px-3">MAIN</div>
+          <nav className="space-y-1">
             {navigation.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`group flex items-center gap-x-3 rounded-xl px-4 py-3 text-sm font-medium transition-all hover:bg-zinc-800 ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${
                   item.current 
-                    ? "bg-zinc-800 text-white" 
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-zinc-800 text-emerald-400" 
+                    : "text-zinc-400 hover:bg-zinc-950 hover:text-white"
                 }`}
               >
                 <item.icon className="h-5 w-5" />
                 {item.name}
+                {item.name === "Advanced" && <Badge variant="secondary" className="ml-auto text-[10px]">Hidden</Badge>}
               </a>
             ))}
           </nav>
 
-          <div className="mt-10 px-6">
-            <div className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-4">Quick Actions</div>
-            <Button className="w-full bg-emerald-600 hover:bg-emerald-500 text-white flex items-center gap-2">
-              <Plus className="h-4 w-4" />
-              New Listing
-            </Button>
+          <div className="mt-12 px-3">
+            <div className="text-xs text-zinc-500 mb-2">CURRENT PLAN</div>
+            <div className="bg-zinc-950 border border-emerald-900 rounded-3xl p-5">
+              <div className="text-emerald-400 text-sm font-medium">Solo Agent • Trial Active</div>
+              <div className="text-4xl font-semibold mt-2 tracking-tighter">$39.95</div>
+              <div className="text-xs text-zinc-500">per month • renews in 13 days</div>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-zinc-800 p-4">
-          <div className="flex items-center gap-3 px-4 py-3 bg-zinc-800 rounded-2xl">
-            <Avatar>
-              <AvatarFallback className="bg-emerald-600 text-white">WM</AvatarFallback>
-            </Avatar>
-            <div className="flex-1 min-w-0">
-              <div className="font-medium text-sm">William Miller</div>
-              <div className="text-emerald-400 text-xs">Realtor • Admin</div>
-            </div>
-            <Button variant="ghost" size="icon" className="text-zinc-400">
-              <Settings className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex-1 lg:ml-72 flex flex-col h-screen">
-        {/* Top Navigation */}
-        <header className="h-16 border-b border-zinc-800 bg-zinc-900 flex items-center px-8 justify-between">
-          <div className="flex items-center gap-4 lg:hidden">
-            <img src="/logo.png" alt="Dream Neighborhood" className="h-8 w-auto" />
-            <div className="font-semibold">Dream Neighborhood Admin</div>
-          </div>
-
-          <div className="flex-1 max-w-md mx-8 relative hidden md:block">
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
-              <Search className="h-4 w-4" />
-            </div>
-            <Input 
-              type="text" 
-              placeholder="Search listings, neighborhoods..." 
-              className="pl-11 bg-zinc-800 border-zinc-700 focus:border-emerald-500 placeholder:text-zinc-500"
-            />
-          </div>
-
-          <div className="flex items-center gap-6">
-            <button className="relative text-zinc-400 hover:text-white transition-colors">
-              <Bell className="h-5 w-5" />
-              <div className="absolute -top-1 -right-1 h-4 w-4 bg-rose-500 rounded-full flex items-center justify-center text-[10px] font-medium">3</div>
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className="text-right">
-                <div className="text-sm font-medium">William Miller</div>
-                <div className="text-emerald-400 text-xs">Online</div>
-              </div>
-              <Avatar className="h-9 w-9 border border-emerald-500/30">
-                <AvatarFallback className="bg-emerald-600">WM</AvatarFallback>
-              </Avatar>
-            </div>
-          </div>
-        </header>
-
-        {/* Dashboard Content */}
-        <main className="flex-1 overflow-auto p-8 bg-zinc-950">
-          <div className="max-w-screen-2xl mx-auto">
-            <div className="flex items-end justify-between mb-10">
-              <div>
-                <h1 className="text-4xl font-semibold tracking-tighter">Dashboard</h1>
-                <p className="text-zinc-400 mt-2">Welcome back, William. Here's what's happening with your neighborhoods today.</p>
-              </div>
-              <div className="text-sm text-zinc-500 font-mono">MAY 4, 2026 • Q2 OVERVIEW</div>
+        {/* Main Content */}
+        <div className="flex-1 p-10 overflow-auto">
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-12">
+              <h1 className="text-5xl font-semibold tracking-tighter text-white">Popup Widget Setup</h1>
+              <p className="text-xl text-zinc-400 mt-3">Install the Neighborhood Explorer in under 5 minutes. No redesign. No tech headaches.</p>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-              {stats.map((stat) => (
-                <Card key={stat.name} className="bg-zinc-900 border-zinc-800">
-                  <CardHeader className="pb-3">
-                    <CardDescription>{stat.name}</CardDescription>
-                    <CardTitle className="text-4xl font-semibold tabular-nums tracking-tighter">{stat.value}</CardTitle>
+            {/* Client Type Selector */}
+            <div className="inline-flex bg-zinc-900 rounded-3xl p-1 mb-10 border border-zinc-800">
+              <button
+                onClick={() => setClientType("selfserve")}
+                className={`px-8 py-3 rounded-[22px] text-sm font-medium transition-all ${clientType === "selfserve" ? "bg-white text-black shadow" : "text-zinc-400 hover:text-white"}`}
+              >
+                Self-Serve Agent
+              </button>
+              <button
+                onClick={() => setClientType("partner")}
+                className={`px-8 py-3 rounded-[22px] text-sm font-medium transition-all ${clientType === "partner" ? "bg-white text-black shadow" : "text-zinc-400 hover:text-white"}`}
+              >
+                Partner Client
+              </button>
+            </div>
+
+            {clientType === "selfserve" ? (
+              /* Self-Serve Flow */
+              <div className="space-y-12">
+                <Card className="bg-zinc-900 border-emerald-900/50">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <div className="w-8 h-8 bg-emerald-500/10 rounded-2xl flex items-center justify-center">
+                        <Code2 className="text-emerald-400" />
+                      </div>
+                      Step 1 — Authorize Your Domain
+                    </CardTitle>
+                    <CardDescription>We'll only allow the popup on domains you authorize.</CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className={`inline-flex items-center text-xs font-medium ${stat.trend === "up" ? "text-emerald-400" : "text-rose-400"}`}>
-                      {stat.change} from last month
+                  <CardContent className="space-y-6">
+                    <div>
+                      <label className="text-sm text-zinc-400 block mb-2">Your Website Domain</label>
+                      <div className="flex gap-3">
+                        <input
+                          type="text"
+                          value={domain}
+                          onChange={(e) => setDomain(e.target.value)}
+                          placeholder="example.com or www.example.com"
+                          className="flex-1 bg-zinc-950 border border-zinc-700 focus:border-emerald-500 rounded-2xl px-5 py-4 text-lg placeholder:text-zinc-600"
+                        />
+                        <Button 
+                          onClick={handleGenerateSnippet}
+                          disabled={!domain}
+                          size="lg"
+                          className="bg-emerald-600 hover:bg-emerald-500 px-10"
+                        >
+                          Generate Snippet
+                        </Button>
+                      </div>
+                      <p className="text-xs text-zinc-500 mt-3">Only the exact domains listed here can display the Neighborhood Popup.</p>
+                    </div>
+
+                    {snippetGenerated && (
+                      <div className="bg-black border border-emerald-900 rounded-3xl p-8 font-mono text-sm">
+                        <div className="text-emerald-400 mb-4 text-xs tracking-widest">YOUR 3-LINE INSTALL CODE</div>
+                        <pre className="text-emerald-300 overflow-auto whitespace-pre-wrap">{generatedSnippet}</pre>
+                        <div className="mt-8 text-xs text-zinc-400">
+                          Copy this code and paste it just before the closing &lt;/body&gt; tag on your website.
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                <div className="flex gap-6">
+                  <Card className="flex-1 bg-zinc-900 border-zinc-800">
+                    <CardHeader>
+                      <CardTitle>Ready to Activate?</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <Button size="lg" className="w-full bg-white text-black hover:bg-zinc-100 text-lg h-14">
+                        Continue to Subscription → $39.95/mo
+                      </Button>
+                      <p className="text-center text-xs text-zinc-500 mt-6">14-day free trial • Cancel anytime</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="flex-1 bg-zinc-900 border-zinc-800">
+                    <CardHeader>
+                      <CardTitle>Need Help Installing?</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-sm text-zinc-400">
+                      Our team (or your IDX provider) can install this for you in minutes. 
+                      <Button variant="link" className="text-emerald-400 p-0 h-auto mt-4 block">Book a 15-minute installation call →</Button>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            ) : (
+              /* Partner Client Flow */
+              <div>
+                <Card className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-emerald-600 max-w-2xl mx-auto">
+                  <CardHeader className="text-center pb-2">
+                    <div className="mx-auto w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
+                      <Zap className="w-9 h-9 text-emerald-400" />
+                    </div>
+                    <CardTitle className="text-4xl">Your Neighborhood Popup is Ready</CardTitle>
+                    <CardDescription className="text-xl text-zinc-400 mt-3">
+                      Your website partner has already added the 3-line code.<br />Now activate your full Neighborhood Explorer.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-8 space-y-8 text-center">
+                    <div className="grid grid-cols-2 gap-4 text-left max-w-md mx-auto">
+                      <div className="bg-zinc-900 p-5 rounded-3xl border border-emerald-900">
+                        <div className="text-emerald-400 text-sm">Solo Agent</div>
+                        <div className="text-4xl font-semibold mt-2">$39.95</div>
+                        <div className="text-xs text-zinc-500">per month</div>
+                      </div>
+                      <div className="bg-zinc-900 p-5 rounded-3xl border border-emerald-900">
+                        <div className="text-emerald-400 text-sm">Annual (Save 37%)</div>
+                        <div className="text-4xl font-semibold mt-2">$299</div>
+                        <div className="text-xs text-emerald-400">billed yearly</div>
+                      </div>
+                    </div>
+
+                    <Button size="lg" className="w-full max-w-md h-16 text-lg bg-emerald-600 hover:bg-emerald-500">
+                      Activate My Popup Now — Start 14-Day Free Trial
+                    </Button>
+
+                    <div className="text-xs text-zinc-500 max-w-xs mx-auto">
+                      Your partner can also apply a custom discount or extend your trial. 
+                      Just ask them!
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
 
-            <div className="grid grid-cols-1 xl:grid-cols-7 gap-6">
-              {/* Performance Chart */}
-              <Card className="xl:col-span-4 bg-zinc-900 border-zinc-800">
-                <CardHeader>
-                  <CardTitle>Platform Performance</CardTitle>
-                  <CardDescription>Views and qualified leads over the last 5 months</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="h-80">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={performanceData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#27272a" />
-                        <XAxis dataKey="month" stroke="#3f3f46" />
-                        <YAxis yAxisId="left" stroke="#3f3f46" />
-                        <YAxis yAxisId="right" orientation="right" stroke="#3f3f46" />
-                        <Tooltip 
-                          contentStyle={{ 
-                            backgroundColor: "#18181b", 
-                            border: "1px solid #3f3f46",
-                            borderRadius: "8px"
-                          }} 
-                        />
-                        <Line 
-                          yAxisId="left"
-                          type="monotone" 
-                          dataKey="views" 
-                          stroke="#10b981" 
-                          strokeWidth={3}
-                          dot={{ fill: "#10b981", r: 4 }}
-                          name="Property Views"
-                        />
-                        <Line 
-                          yAxisId="right"
-                          type="monotone" 
-                          dataKey="leads" 
-                          stroke="#a5f3fc" 
-                          strokeWidth={3}
-                          dot={{ fill: "#67e8f9", r: 4 }}
-                          name="Qualified Leads"
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Recent Listings */}
-              <Card className="xl:col-span-3 bg-zinc-900 border-zinc-800">
-                <CardHeader className="flex flex-row items-center justify-between">
-                  <div>
-                    <CardTitle>Recent Listings</CardTitle>
-                    <CardDescription>Updated in real-time</CardDescription>
-                  </div>
-                  <Badge variant="outline" className="bg-emerald-950 text-emerald-400 border-emerald-900">LIVE</Badge>
-                </CardHeader>
-                <CardContent>
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="border-zinc-800 hover:bg-transparent">
-                        <TableHead className="text-zinc-400">Address</TableHead>
-                        <TableHead className="text-zinc-400">Status</TableHead>
-                        <TableHead className="text-zinc-400 text-right">Price</TableHead>
-                        <TableHead className="text-zinc-400 text-right">Views</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {recentListings.map((listing) => (
-                        <TableRow key={listing.id} className="border-zinc-800 hover:bg-zinc-800/50">
-                          <TableCell className="font-medium">{listing.address}</TableCell>
-                          <TableCell>
-                            <Badge variant={listing.status === "Live" ? "default" : "secondary"} className={listing.status === "Live" ? "bg-emerald-500" : ""}>
-                              {listing.status}
-                            </Badge>
-                          </TableCell>
-                          <TableCell className="text-right font-mono">{listing.price}</TableCell>
-                          <TableCell className="text-right text-emerald-400 font-mono">{listing.views}</TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Neighborhood Insights */}
-            <Card className="mt-8 bg-zinc-900 border-zinc-800">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <MapPin className="h-5 w-5 text-emerald-400" />
-                  Top Performing Neighborhoods
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {[
-                    { name: "South Hutchinson Island", performance: "Excellent", views: "12.4k", color: "emerald" },
-                    { name: "St. Lucie Village", performance: "Very Strong", views: "8.9k", color: "cyan" },
-                    { name: "Melbourne Core", performance: "Growing Fast", views: "15.2k", color: "violet" },
-                  ].map((nb) => (
-                    <div key={nb.name} className="bg-zinc-950 border border-zinc-800 rounded-3xl p-6 hover:border-emerald-500/50 transition-colors group">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <div className="font-semibold text-lg group-hover:text-emerald-400 transition-colors">{nb.name}</div>
-                          <div className={`text-${nb.color}-400 text-sm mt-1`}>{nb.performance}</div>
-                        </div>
-                        <Badge variant="outline">{nb.views} views</Badge>
-                      </div>
-                      <div className="mt-8 h-2 bg-zinc-800 rounded-full overflow-hidden">
-                        <div className={`h-full w-[${nb.name.includes("Melbourne") ? "92" : nb.name.includes("Hutchinson") ? "78" : "65"}%] bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-full`} />
-                      </div>
-                    </div>
-                  ))}
+                <div className="text-center mt-16 text-zinc-500 text-sm">
+                  Questions? Your website partner manages technical setup.<br />
+                  This page is purely for marketing, billing, and upgrading your experience.
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            )}
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );
