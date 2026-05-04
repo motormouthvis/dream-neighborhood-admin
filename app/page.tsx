@@ -1,19 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from 'react';
 import { 
   Home, 
-  Building2, 
+  Map, 
+  FileText, 
   BarChart3, 
   Users, 
-  Settings, 
-  Bell, 
-  Search, 
+  CreditCard, 
+  HelpCircle, 
+  Settings,
   Plus,
-  MapPin,
-  Code2,
-  Zap
-} from "lucide-react";
+  Search,
+  Bell
+} from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -27,244 +27,291 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-const navigation = [
-  { name: "Popup Setup", href: "#", icon: Code2, current: true },
-  { name: "Analytics", href: "#", icon: BarChart3, current: false },
-  { name: "Neighborhoods", href: "#", icon: MapPin, current: false },
-  { name: "Advanced", href: "#", icon: Settings, current: false },
+type View = 'get-started' | 'neighborhood-explorer' | 'manage-reports' | 'manage-explorers' | 'leads' | 'subscription' | 'team-settings';
+
+const sidebarItems = [
+  { id: 'get-started' as View, label: 'Get Started', icon: Home },
+  { id: 'neighborhood-explorer' as View, label: 'Neighborhood Explorer', icon: Map },
+  { id: 'manage-reports' as View, label: 'Manage Reports', icon: FileText },
+  { id: 'manage-explorers' as View, label: 'Manage Explorers', icon: BarChart3 },
+  { id: 'leads' as View, label: 'Leads', icon: Users },
+  { id: 'subscription' as View, label: 'Subscription', icon: CreditCard },
 ];
 
-export default function AdminDashboard() {
-  const [clientType, setClientType] = useState<"selfserve" | "partner">("selfserve");
-  const [domain, setDomain] = useState("");
-  const [snippetGenerated, setSnippetGenerated] = useState(false);
+export default function DreamNeighborhoodApp() {
+  const [currentView, setCurrentView] = useState<View>('get-started');
+  const [teamName] = useState("bill@miller mailbox.com");
 
-  const generatedSnippet = domain 
-    ? `<script src="https://cdn.dreamneighborhood.com/widget.js" data-domain="${domain}" async></script>`
-    : "";
+  const renderContent = () => {
+    switch (currentView) {
+      case 'get-started':
+        return (
+          <div className="space-y-10">
+            <div>
+              <h1 className="text-4xl font-semibold text-zinc-900">Get Started with Dream Neighborhood</h1>
+              <p className="text-zinc-600 mt-3">Complete these steps to activate your Neighborhood Explorer widget.</p>
+            </div>
 
-  const handleGenerateSnippet = () => {
-    if (domain) {
-      setSnippetGenerated(true);
+            {/* Get Started Checklist */}
+            <Card className="bg-emerald-50 border-emerald-100">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-emerald-800">Get Started Checklist</CardTitle>
+                  <div className="text-emerald-600 text-sm font-medium">1 of 6 complete</div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-5">
+                  {[
+                    { text: "Watch Our Demo Video", done: true },
+                    { text: "Create Your First Report", done: false },
+                    { text: "Create Your First Explorer", done: false },
+                    { text: "Adjust Your Team Settings", done: false },
+                    { text: "Share Your Explorer with a Client", done: false },
+                    { text: "Add Your Explorer to Your Website", done: false },
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4">
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${item.done ? 'bg-emerald-600' : 'border-2 border-zinc-300'}`}>
+                        {item.done && <span className="text-white text-xs">✓</span>}
+                      </div>
+                      <span className={item.done ? 'line-through text-zinc-500' : 'text-zinc-700'}>{item.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Quick Actions */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Quick Actions</CardTitle>
+                </CardHeader>
+                <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <Button className="h-28 bg-emerald-600 hover:bg-emerald-700 text-white flex flex-col items-center justify-center gap-2">
+                    <Plus className="w-8 h-8" />
+                    <span>Create Your First Report</span>
+                  </Button>
+                  <Button variant="outline" className="h-28 flex flex-col items-center justify-center gap-2 border-emerald-200 text-emerald-700 hover:bg-emerald-50">
+                    <Map className="w-8 h-8" />
+                    <span>Create Your First Explorer</span>
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Resources */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Resources &amp; Support</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div>
+                    <div className="font-medium">Watch our Demo Video</div>
+                    <p className="text-sm text-zinc-600 mt-1">Watch this quick demo video to get a feel for how Dream Neighborhood works.</p>
+                    <Button className="mt-4 bg-white border border-emerald-600 text-emerald-700 hover:bg-emerald-50">Watch Video</Button>
+                  </div>
+                  <div className="pt-6 border-t">
+                    <div className="text-emerald-700 font-medium">Book a Free Support Call With Our Team</div>
+                    <div className="text-sm text-zinc-600 mt-1">Our team is here to help you get started.</div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        );
+
+      case 'subscription':
+        return (
+          <div>
+            <h1 className="text-4xl font-semibold mb-2">Manage Your Subscription</h1>
+            <p className="text-zinc-600 mb-10">Upgrade to unlock unlimited reports and full Neighborhood Explorer access.</p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <Card className="border-emerald-200 bg-white">
+                <CardHeader>
+                  <div className="flex justify-between">
+                    <div>
+                      <Badge className="bg-emerald-100 text-emerald-700">Recommended</Badge>
+                      <CardTitle className="mt-4">Solo Agent</CardTitle>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-5xl font-semibold text-emerald-700">$39.95</div>
+                      <div className="text-sm text-zinc-500">per month</div>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-4 text-sm">
+                    <li className="flex items-center gap-3">✅ Use the Pop Up on your website</li>
+                    <li className="flex items-center gap-3">✅ Unlimited Neighborhood Explorers</li>
+                    <li className="flex items-center gap-3">✅ Generate reports</li>
+                    <li className="flex items-center gap-3">✅ Capture leads directly</li>
+                  </ul>
+                  <Button className="w-full mt-10 h-14 bg-emerald-600">Subscribe — Start 14-day Free Trial</Button>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Brokerage / Team Plan</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-5xl font-semibold">$149</div>
+                  <div className="text-sm text-zinc-500">per month • up to 10 agents</div>
+                  <p className="mt-8 text-sm text-zinc-600">Everything in Solo plus team management, white-label options, and dedicated support.</p>
+                  <Button variant="outline" className="w-full mt-10 h-14">Contact Sales for Brokerage Pricing</Button>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        );
+
+      case 'team-settings':
+        return (
+          <div>
+            <h1 className="text-4xl font-semibold mb-8">Manage Your Team Settings</h1>
+            
+            <div className="bg-white border rounded-3xl p-10">
+              <div className="grid grid-cols-2 gap-12">
+                <div>
+                  <div className="uppercase text-xs tracking-widest text-zinc-500 mb-2">TEAM NAME</div>
+                  <input defaultValue="bill@miller mailbox.com" className="text-lg py-6 border border-zinc-300 rounded-2xl px-5 w-full" />
+                  <p className="text-xs text-zinc-500 mt-3">This is how your team members will see your team name inside of our platform.</p>
+                </div>
+                <div>
+                  <div className="uppercase text-xs tracking-widest text-zinc-500 mb-2">TEAM ID</div>
+                  <input defaultValue="billmiller mailbox.com" className="text-lg py-6 font-mono border border-zinc-300 rounded-2xl px-5 w-full" />
+                  <p className="text-xs text-zinc-500 mt-3">This is our unique string that we use to identify you in our platform.</p>
+                </div>
+              </div>
+
+              <div className="mt-16 pt-10 border-t">
+                <div className="text-rose-600 font-medium mb-4">Danger Zone</div>
+                <p className="text-sm text-zinc-600">Deleting your team will permanently delete all of your team data and associated reports, widgets and leads.</p>
+                <Button variant="destructive" className="mt-6">Delete Team</Button>
+              </div>
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <div className="flex flex-col items-center justify-center h-96 text-center">
+            <div className="text-6xl mb-6">🏠</div>
+            <h3 className="text-2xl font-semibold text-zinc-800">Coming Soon</h3>
+            <p className="text-zinc-600 mt-3 max-w-xs">The {currentView.replace('-', ' ')} view is being built to match the real Dream Neighborhood platform.</p>
+          </div>
+        );
     }
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Top Nav */}
-      <nav className="border-b border-zinc-800 bg-zinc-900 px-8 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-emerald-600 rounded-2xl flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white" />
+    <div className="flex h-screen bg-zinc-50 overflow-hidden font-sans">
+      {/* Sidebar */}
+      <div className="w-72 bg-[#0A6B5F] text-white flex flex-col">
+        <div className="px-8 pt-8 pb-6 flex items-center gap-3 border-b border-white/20">
+          <img src="/logo.png" alt="Dream Neighborhood" className="h-10 w-auto brightness-110" />
+          <div className="font-semibold text-2xl tracking-tight">Dream Neighborhood</div>
+        </div>
+
+        <div className="px-6 pt-8">
+          <div className="bg-white/10 rounded-2xl p-4 flex items-center gap-3">
+            <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center text-sm font-medium">BM</div>
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-medium truncate">{teamName}</div>
+              <div className="text-xs text-emerald-200">Current Team</div>
             </div>
-            <div>
-              <div className="font-semibold text-xl tracking-tight">Dream Neighborhood</div>
-              <div className="text-[10px] text-emerald-400 -mt-1">POPUP WIDGET ADMIN</div>
-            </div>
+            <div className="text-xs bg-white/20 px-3 py-1 rounded-full">▼</div>
           </div>
         </div>
 
-        <div className="flex items-center gap-8 text-sm">
-          <div className="flex gap-8">
-            <button 
-              onClick={() => setClientType("selfserve")}
-              className={`pb-1 border-b-2 transition-colors ${clientType === 'selfserve' ? 'border-emerald-500 text-white' : 'border-transparent text-zinc-400 hover:text-zinc-200'}`}
-            >
-              Self-Serve Customers
-            </button>
-            <button 
-              onClick={() => setClientType("partner")}
-              className={`pb-1 border-b-2 transition-colors ${clientType === 'partner' ? 'border-emerald-500 text-white' : 'border-transparent text-zinc-400 hover:text-zinc-200'}`}
-            >
-              Partner Clients
-            </button>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <Avatar className="h-8 w-8">
-              <AvatarFallback className="bg-emerald-600 text-xs">WM</AvatarFallback>
-            </Avatar>
-            <div>
-              <div className="text-sm font-medium">William Miller</div>
-              <div className="text-xs text-emerald-400">Founder</div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div className="flex">
-        {/* Sidebar */}
-        <div className="w-72 bg-zinc-900 border-r border-zinc-800 h-[calc(100vh-73px)] p-6 flex-shrink-0">
-          <div className="uppercase text-xs tracking-widest text-zinc-500 mb-4 px-3">MAIN</div>
-          <nav className="space-y-1">
-            {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium transition-all ${
-                  item.current 
-                    ? "bg-zinc-800 text-emerald-400" 
-                    : "text-zinc-400 hover:bg-zinc-950 hover:text-white"
+        <div className="mt-10 px-3 flex-1 overflow-auto">
+          <div className="px-5 text-xs uppercase tracking-widest text-emerald-200 mb-4">MAIN MENU</div>
+          
+          {sidebarItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = currentView === item.id;
+            return (
+              <button
+                key={item.id}
+                onClick={() => setCurrentView(item.id)}
+                className={`w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left mb-1 transition-all ${
+                  isActive 
+                    ? 'bg-white text-[#0A6B5F] shadow-inner' 
+                    : 'hover:bg-white/10 text-white'
                 }`}
               >
-                <item.icon className="h-5 w-5" />
-                {item.name}
-                {item.name === "Advanced" && <Badge variant="secondary" className="ml-auto text-[10px]">Hidden</Badge>}
-              </a>
-            ))}
-          </nav>
+                <Icon className={`w-5 h-5 ${isActive ? 'text-[#0A6B5F]' : ''}`} />
+                <span className="font-medium">{item.label}</span>
+              </button>
+            );
+          })}
 
-          <div className="mt-12 px-3">
-            <div className="text-xs text-zinc-500 mb-2">CURRENT PLAN</div>
-            <div className="bg-zinc-950 border border-emerald-900 rounded-3xl p-5">
-              <div className="text-emerald-400 text-sm font-medium">Solo Agent • Trial Active</div>
-              <div className="text-4xl font-semibold mt-2 tracking-tighter">$39.95</div>
-              <div className="text-xs text-zinc-500">per month • renews in 13 days</div>
-            </div>
-          </div>
+          <div className="px-5 mt-12 text-xs uppercase tracking-widest text-emerald-200 mb-4">COMMUNITY</div>
+          
+          <button className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left hover:bg-white/10 text-white">
+            <HelpCircle className="w-5 h-5" />
+            <span className="font-medium">Help &amp; Support</span>
+          </button>
+          
+          <button 
+            onClick={() => setCurrentView('team-settings')}
+            className="w-full flex items-center gap-3 px-5 py-4 rounded-2xl text-left hover:bg-white/10 text-white"
+          >
+            <Settings className="w-5 h-5" />
+            <span className="font-medium">Team Settings</span>
+          </button>
         </div>
 
-        {/* Main Content */}
-        <div className="flex-1 p-10 overflow-auto">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-12">
-              <h1 className="text-5xl font-semibold tracking-tighter text-white">Popup Widget Setup</h1>
-              <p className="text-xl text-zinc-400 mt-3">Install the Neighborhood Explorer in under 5 minutes. No redesign. No tech headaches.</p>
+        <div className="p-6 border-t border-white/10 mt-auto">
+          <div className="flex items-center gap-3 text-xs text-emerald-100">
+            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+            All systems operational
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top Header */}
+        <header className="h-16 border-b bg-white px-8 flex items-center justify-between flex-shrink-0">
+          <div className="flex items-center gap-4 text-sm">
+            <span className="text-emerald-700 font-medium">bill@miller mailbox.com</span>
+            <span className="text-zinc-300">→</span>
+            <span className="font-semibold text-zinc-800 capitalize">
+              {currentView === 'get-started' ? 'Get Started' : 
+               currentView.replace('-', ' ')}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-6">
+            <div className="relative">
+              <input 
+                placeholder="Search reports, explorers..." 
+                className="w-80 bg-zinc-100 border border-zinc-200 focus:bg-white pl-10 rounded-2xl py-3 text-sm"
+              />
+              <Search className="absolute left-4 top-3 text-zinc-400 w-4 h-4" />
             </div>
 
-            {/* Client Type Selector */}
-            <div className="inline-flex bg-zinc-900 rounded-3xl p-1 mb-10 border border-zinc-800">
-              <button
-                onClick={() => setClientType("selfserve")}
-                className={`px-8 py-3 rounded-[22px] text-sm font-medium transition-all ${clientType === "selfserve" ? "bg-white text-black shadow" : "text-zinc-400 hover:text-white"}`}
-              >
-                Self-Serve Agent
-              </button>
-              <button
-                onClick={() => setClientType("partner")}
-                className={`px-8 py-3 rounded-[22px] text-sm font-medium transition-all ${clientType === "partner" ? "bg-white text-black shadow" : "text-zinc-400 hover:text-white"}`}
-              >
-                Partner Client
-              </button>
+            <div className="flex items-center gap-6 text-zinc-500">
+              <Bell className="w-5 h-5 cursor-pointer hover:text-zinc-700" />
+              <div className="flex items-center gap-3">
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-emerald-100 text-emerald-700 text-xs">WM</AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="text-sm font-medium text-zinc-800">William Miller</div>
+                  <div className="text-[10px] text-emerald-600 -mt-0.5">Admin</div>
+                </div>
+              </div>
             </div>
+          </div>
+        </header>
 
-            {clientType === "selfserve" ? (
-              /* Self-Serve Flow */
-              <div className="space-y-12">
-                <Card className="bg-zinc-900 border-emerald-900/50">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-emerald-500/10 rounded-2xl flex items-center justify-center">
-                        <Code2 className="text-emerald-400" />
-                      </div>
-                      Step 1 — Authorize Your Domain
-                    </CardTitle>
-                    <CardDescription>We'll only allow the popup on domains you authorize.</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-6">
-                    <div>
-                      <label className="text-sm text-zinc-400 block mb-2">Your Website Domain</label>
-                      <div className="flex gap-3">
-                        <input
-                          type="text"
-                          value={domain}
-                          onChange={(e) => setDomain(e.target.value)}
-                          placeholder="example.com or www.example.com"
-                          className="flex-1 bg-zinc-950 border border-zinc-700 focus:border-emerald-500 rounded-2xl px-5 py-4 text-lg placeholder:text-zinc-600"
-                        />
-                        <Button 
-                          onClick={handleGenerateSnippet}
-                          disabled={!domain}
-                          size="lg"
-                          className="bg-emerald-600 hover:bg-emerald-500 px-10"
-                        >
-                          Generate Snippet
-                        </Button>
-                      </div>
-                      <p className="text-xs text-zinc-500 mt-3">Only the exact domains listed here can display the Neighborhood Popup.</p>
-                    </div>
-
-                    {snippetGenerated && (
-                      <div className="bg-black border border-emerald-900 rounded-3xl p-8 font-mono text-sm">
-                        <div className="text-emerald-400 mb-4 text-xs tracking-widest">YOUR 3-LINE INSTALL CODE</div>
-                        <pre className="text-emerald-300 overflow-auto whitespace-pre-wrap">{generatedSnippet}</pre>
-                        <div className="mt-8 text-xs text-zinc-400">
-                          Copy this code and paste it just before the closing &lt;/body&gt; tag on your website.
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-
-                <div className="flex gap-6">
-                  <Card className="flex-1 bg-zinc-900 border-zinc-800">
-                    <CardHeader>
-                      <CardTitle>Ready to Activate?</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <Button size="lg" className="w-full bg-white text-black hover:bg-zinc-100 text-lg h-14">
-                        Continue to Subscription → $39.95/mo
-                      </Button>
-                      <p className="text-center text-xs text-zinc-500 mt-6">14-day free trial • Cancel anytime</p>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="flex-1 bg-zinc-900 border-zinc-800">
-                    <CardHeader>
-                      <CardTitle>Need Help Installing?</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-sm text-zinc-400">
-                      Our team (or your IDX provider) can install this for you in minutes. 
-                      <Button variant="link" className="text-emerald-400 p-0 h-auto mt-4 block">Book a 15-minute installation call →</Button>
-                    </CardContent>
-                  </Card>
-                </div>
-              </div>
-            ) : (
-              /* Partner Client Flow */
-              <div>
-                <Card className="bg-gradient-to-br from-zinc-900 to-zinc-950 border-emerald-600 max-w-2xl mx-auto">
-                  <CardHeader className="text-center pb-2">
-                    <div className="mx-auto w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
-                      <Zap className="w-9 h-9 text-emerald-400" />
-                    </div>
-                    <CardTitle className="text-4xl">Your Neighborhood Popup is Ready</CardTitle>
-                    <CardDescription className="text-xl text-zinc-400 mt-3">
-                      Your website partner has already added the 3-line code.<br />Now activate your full Neighborhood Explorer.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-8 space-y-8 text-center">
-                    <div className="grid grid-cols-2 gap-4 text-left max-w-md mx-auto">
-                      <div className="bg-zinc-900 p-5 rounded-3xl border border-emerald-900">
-                        <div className="text-emerald-400 text-sm">Solo Agent</div>
-                        <div className="text-4xl font-semibold mt-2">$39.95</div>
-                        <div className="text-xs text-zinc-500">per month</div>
-                      </div>
-                      <div className="bg-zinc-900 p-5 rounded-3xl border border-emerald-900">
-                        <div className="text-emerald-400 text-sm">Annual (Save 37%)</div>
-                        <div className="text-4xl font-semibold mt-2">$299</div>
-                        <div className="text-xs text-emerald-400">billed yearly</div>
-                      </div>
-                    </div>
-
-                    <Button size="lg" className="w-full max-w-md h-16 text-lg bg-emerald-600 hover:bg-emerald-500">
-                      Activate My Popup Now — Start 14-Day Free Trial
-                    </Button>
-
-                    <div className="text-xs text-zinc-500 max-w-xs mx-auto">
-                      Your partner can also apply a custom discount or extend your trial. 
-                      Just ask them!
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <div className="text-center mt-16 text-zinc-500 text-sm">
-                  Questions? Your website partner manages technical setup.<br />
-                  This page is purely for marketing, billing, and upgrading your experience.
-                </div>
-              </div>
-            )}
+        {/* Page Content */}
+        <div className="flex-1 overflow-auto p-10 bg-zinc-50">
+          <div className="max-w-6xl mx-auto">
+            {renderContent()}
           </div>
         </div>
       </div>

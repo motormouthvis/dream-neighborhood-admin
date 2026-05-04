@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Dream Neighborhood Admin",
-  description: "Customer Admin Panel for Dream Neighborhood Realty Co. - Manage listings, neighborhoods, analytics, and insights.",
+  title: "Dream Neighborhood",
+  description: "Manage your Neighborhood Explorer, reports, leads, and subscription",
   icons: {
     icon: "/logo.png",
   },
@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-screen bg-zinc-950 text-zinc-50">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="bg-white text-zinc-900">
         {children}
         <Toaster />
       </body>
