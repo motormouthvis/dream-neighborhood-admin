@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -32,6 +33,8 @@ export default function RootLayout({
       <body className="bg-white text-zinc-900">
         {children}
         <Toaster />
+        {/* Live Dream Neighborhood Popup Widget — registered to this site URL on the server */}
+        <Script src="https://app.dreamneighborhood.com/explorer/sdk.js" strategy="afterInteractive" />
       </body>
     </html>
   );

@@ -11,11 +11,9 @@ export default function DreamNeighborhood() {
   const [activeTab, setActiveTab] = useState('self-serve');
   const [copied, setCopied] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(false);
-  const [popupTooltipOpen, setPopupTooltipOpen] = useState(true);
-  const [popupOpen, setPopupOpen] = useState(false);
 
   // Static script - same for all customers
-  const staticScript = `<script src="https://cdn.dreamneighborhood.com/popup.js" async></script>`;
+  const staticScript = `<script src="https://app.dreamneighborhood.com/explorer/sdk.js" async></script>`;
 
   const copyScript = () => {
     navigator.clipboard.writeText(staticScript);
@@ -126,47 +124,39 @@ export default function DreamNeighborhood() {
             <div className="grid grid-cols-12 gap-5">
               {/* COLUMN 1 */}
               <div className="col-span-12 lg:col-span-7 space-y-5">
-                {/* Subscription Status Box - rich with gradient */}
-                <Card className="border-0 shadow-md overflow-hidden">
-                  <div className="bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-700 text-white p-5">
-                    <div className="flex items-center justify-between">
+                {/* Subscription Status Box - compact, lighter green, single line */}
+                <Card className="border border-emerald-200 shadow-sm bg-gradient-to-r from-emerald-50 via-white to-emerald-50/50 overflow-hidden">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-4 flex-wrap">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-emerald-300 rounded-full animate-pulse shadow-[0_0_10px_rgba(110,231,183,0.8)]"></div>
-                        <span className="text-sm font-semibold text-white">Subscription</span>
-                        <span className="text-[10px] bg-white/20 backdrop-blur text-white px-2 py-0.5 rounded-full font-medium tracking-wider">ACTIVE</span>
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                        <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-semibold tracking-wider">ACTIVE</span>
                       </div>
-                      <Button size="sm" className="bg-white hover:bg-emerald-50 text-emerald-700 text-xs h-8 rounded-xl px-4 font-semibold shadow-sm">
+
+                      <div className="flex items-center gap-1.5 text-xs">
+                        <span className="text-zinc-500">Plan:</span>
+                        <div className="inline-flex bg-white border border-emerald-200 rounded-lg overflow-hidden text-[11px] font-medium">
+                          <span className="px-2.5 py-1 text-zinc-500">Solo</span>
+                          <span className="px-2.5 py-1 bg-emerald-600 text-white">Team</span>
+                          <span className="px-2.5 py-1 text-zinc-500">Enterprise</span>
+                        </div>
+                      </div>
+
+                      <div className="text-xs text-zinc-600">
+                        <span className="text-zinc-400">Monthly</span> · <span className="font-semibold text-zinc-900">$74.50</span> · <span className="text-zinc-400">Jun 4, 2026</span>
+                      </div>
+
+                      <Button size="sm" className="ml-auto bg-emerald-600 hover:bg-emerald-700 text-xs h-8 rounded-lg px-4 font-medium shadow-sm">
                         Manage Subscription
                       </Button>
-                    </div>
-                    <div className="mt-4 flex items-baseline gap-3">
-                      <div className="text-3xl font-bold tracking-tight">Team</div>
-                      <div className="text-emerald-200 text-xs">plan</div>
-                    </div>
-                    <div className="text-emerald-100/80 text-xs mt-1">Solo • <span className="font-semibold text-white">Team</span> • Enterprise</div>
-                  </div>
-                  <CardContent className="p-5 bg-white">
-                    <div className="grid grid-cols-3 gap-3 text-xs">
-                      <div className="p-3 bg-gradient-to-br from-emerald-50 to-white rounded-xl border border-emerald-100">
-                        <div className="text-emerald-700 text-[10px] font-semibold tracking-wider uppercase">Billing</div>
-                        <div className="font-semibold text-zinc-900 mt-1 text-sm">Monthly</div>
-                      </div>
-                      <div className="p-3 bg-gradient-to-br from-emerald-50 to-white rounded-xl border border-emerald-100">
-                        <div className="text-emerald-700 text-[10px] font-semibold tracking-wider uppercase">Next Amount</div>
-                        <div className="font-semibold text-zinc-900 mt-1 text-sm">$74.50</div>
-                      </div>
-                      <div className="p-3 bg-gradient-to-br from-emerald-50 to-white rounded-xl border border-emerald-100">
-                        <div className="text-emerald-700 text-[10px] font-semibold tracking-wider uppercase">Next Date</div>
-                        <div className="font-semibold text-zinc-900 mt-1 text-sm">Jun 4, 2026</div>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                {/* Snippet + Copy - styled */}
-                <Card className="border-0 shadow-md overflow-hidden">
-                  <CardContent className="p-0">
-                    <div className="p-5 bg-gradient-to-r from-zinc-50 to-white border-b border-zinc-100 flex items-center justify-between">
+                {/* Snippet + Copy - light shaded look */}
+                <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-emerald-50/40 via-white to-emerald-50/40 overflow-hidden">
+                  <CardContent className="p-5">
+                    <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-2">
                         <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
                           <Zap className="w-3.5 h-3.5" />
@@ -180,10 +170,10 @@ export default function DreamNeighborhood() {
                         {copied ? <><Check className="w-3.5 h-3.5" /> Copied</> : <><Copy className="w-3.5 h-3.5" /> Copy</>}
                       </button>
                     </div>
-                    <div className="bg-zinc-950 p-4">
-                      <div className="text-emerald-300 font-mono text-[11px] overflow-auto">{staticScript}</div>
-                      <p className="text-[10px] text-zinc-500 mt-2">Paste before closing &lt;/body&gt; tag.</p>
+                    <div className="bg-white border border-emerald-100 rounded-xl px-4 py-3 font-mono text-[11px] text-emerald-900 overflow-auto shadow-inner">
+                      {staticScript}
                     </div>
+                    <p className="text-[11px] text-zinc-500 mt-2">Paste before the closing &lt;/body&gt; tag on every page.</p>
                   </CardContent>
                 </Card>
 
@@ -204,7 +194,7 @@ export default function DreamNeighborhood() {
                 </Card>
 
                 {/* Platform-specific instructions */}
-                <Card className="border-0 shadow-md">
+                <Card className="border border-emerald-100 shadow-sm">
                   <CardContent className="p-5">
                     <div className="flex items-center gap-2 mb-3">
                       <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
@@ -217,15 +207,25 @@ export default function DreamNeighborhood() {
                     </div>
                     <div className="grid grid-cols-3 gap-2">
                       {[
-                        { name: "Squarespace", url: "#" },
-                        { name: "Wix", url: "#" },
-                        { name: "WordPress", url: "#" },
-                        { name: "Webflow", url: "#" },
-                        { name: "Shopify", url: "#" },
-                        { name: "Other CMS", url: "#" },
+                        { name: "Squarespace", slug: "squarespace", emoji: "▢" },
+                        { name: "Wix", slug: "wix", emoji: "✦" },
+                        { name: "WordPress", slug: "wordpress", emoji: "Ⓦ" },
+                        { name: "Webflow", slug: "webflow", emoji: "❖" },
+                        { name: "Shopify", slug: "shopify", emoji: "🛍" },
+                        { name: "GoDaddy", slug: "godaddy", emoji: "🏷" },
+                        { name: "Other / HTML", slug: "other", emoji: "<>" },
                       ].map((p) => (
-                        <a key={p.name} href={p.url} className="flex items-center justify-between p-2.5 bg-gradient-to-br from-white to-zinc-50 border border-zinc-200 rounded-xl text-xs text-zinc-700 hover:border-emerald-300 hover:from-emerald-50 hover:to-white hover:text-emerald-700 transition-all">
-                          <span className="font-medium">{p.name}</span>
+                        <a
+                          key={p.slug}
+                          href={`/install/${p.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-between p-2.5 bg-gradient-to-br from-white to-emerald-50/30 border border-zinc-200 rounded-xl text-xs text-zinc-700 hover:border-emerald-300 hover:from-emerald-50 hover:to-white hover:text-emerald-700 transition-all"
+                        >
+                          <span className="flex items-center gap-2">
+                            <span className="text-base leading-none">{p.emoji}</span>
+                            <span className="font-medium">{p.name}</span>
+                          </span>
                           <ExternalLink className="w-3 h-3 text-zinc-400" />
                         </a>
                       ))}
@@ -268,24 +268,34 @@ export default function DreamNeighborhood() {
                   </CardContent>
                 </Card>
 
-                {/* Video demo - now SECOND */}
-                <Card className="border-0 shadow-md overflow-hidden">
-                  <a href="#" className="block group">
-                    <div className="aspect-video bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 relative flex items-center justify-center">
-                      <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] [background-size:18px]"></div>
-                      <div className="relative w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                        <PlayCircle className="w-10 h-10 text-emerald-600" strokeWidth={1.5} />
+                {/* Video demo - actual YouTube embed */}
+                <Card className="border border-emerald-100 shadow-sm overflow-hidden">
+                  <div className="aspect-video bg-zinc-900">
+                    <iframe
+                      src="https://www.youtube.com/embed/j01aKyHJ2E8?rel=0"
+                      title="Dream Neighborhood Demo"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                  <div className="p-4 flex items-center justify-between bg-gradient-to-r from-white to-emerald-50/30">
+                    <div>
+                      <div className="font-semibold text-sm text-zinc-900 flex items-center gap-2">
+                        <PlayCircle className="w-4 h-4 text-emerald-600" />
+                        Watch Demo Video
                       </div>
-                      <div className="absolute bottom-3 left-4 text-white text-xs font-medium bg-black/30 backdrop-blur px-2 py-0.5 rounded-md">2:14</div>
+                      <div className="text-xs text-zinc-500">See Dream Neighborhood in action</div>
                     </div>
-                    <div className="p-4 flex items-center justify-between bg-gradient-to-r from-white to-emerald-50/30">
-                      <div>
-                        <div className="font-semibold text-sm text-zinc-900">Watch Demo Video</div>
-                        <div className="text-xs text-zinc-500">See Dream Neighborhood in action</div>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-zinc-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition-all" />
-                    </div>
-                  </a>
+                    <a
+                      href="https://youtu.be/j01aKyHJ2E8"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-emerald-700 font-medium hover:text-emerald-800 flex items-center gap-1"
+                    >
+                      Open on YouTube <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
                 </Card>
               </div>
             </div>
@@ -649,53 +659,9 @@ export default function DreamNeighborhood() {
           </div>
         </div>
 
-        {/* Main Content */}
+        {/* Main Content (the live Dream Neighborhood SDK will render its own widget in the bottom-right) */}
         <div className="flex-1 overflow-auto bg-zinc-50 p-6 relative">
           {renderContent()}
-
-          {/* Live Dream Neighborhood Popup Widget Demo - floating in bottom right */}
-          {activeTab === 'self-serve' && (
-            <div className="fixed bottom-6 right-6 flex flex-col items-end gap-3 z-50">
-              {popupOpen ? (
-                <div className="w-80 bg-white rounded-2xl shadow-2xl border border-emerald-100 overflow-hidden animate-in slide-in-from-bottom-4">
-                  <div className="bg-gradient-to-r from-[#0A6B5F] to-emerald-700 text-white p-4 flex items-center justify-between">
-                    <div>
-                      <div className="text-[10px] uppercase tracking-widest text-emerald-200">Dream Neighborhood</div>
-                      <div className="font-semibold text-sm">6947 Oporto Drive</div>
-                    </div>
-                    <button onClick={() => { setPopupOpen(false); setPopupTooltipOpen(false); }} className="text-emerald-200 hover:text-white text-lg leading-none">×</button>
-                  </div>
-                  <div className="p-4">
-                    <div className="aspect-video bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl flex items-center justify-center mb-3 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[radial-gradient(#0A6B5F30_1px,transparent_1px)] [background-size:14px]"></div>
-                      <Map className="w-10 h-10 text-emerald-700 relative z-10" />
-                    </div>
-                    <div className="text-xs font-medium text-zinc-900 mb-1">Los Angeles, CA</div>
-                    <div className="text-[11px] text-zinc-500 leading-snug">Schools, walk score, comps, amenities, and more — right at your buyer's fingertips.</div>
-                    <Button size="sm" className="w-full mt-3 bg-emerald-600 hover:bg-emerald-700 text-xs h-8 rounded-lg">
-                      Explore Neighborhood
-                    </Button>
-                  </div>
-                </div>
-              ) : (
-                popupTooltipOpen && (
-                  <div className="bg-white rounded-2xl shadow-xl border border-zinc-100 px-4 py-3 flex items-center gap-3 max-w-xs animate-in fade-in">
-                    <div className="text-[11px] text-zinc-700 leading-snug">
-                      Click here to explore the neighborhood<br />around 6947 Oporto Dr
-                    </div>
-                    <button onClick={() => setPopupTooltipOpen(false)} className="text-zinc-300 hover:text-zinc-500 leading-none flex-shrink-0">×</button>
-                  </div>
-                )
-              )}
-              <button
-                onClick={() => { setPopupOpen(!popupOpen); setPopupTooltipOpen(false); }}
-                className="w-14 h-14 bg-gradient-to-br from-[#0A6B5F] to-emerald-600 hover:from-emerald-700 hover:to-emerald-700 text-white rounded-full flex items-center justify-center shadow-2xl ring-4 ring-white transition-all hover:scale-105"
-                aria-label="Open Dream Neighborhood widget"
-              >
-                <span className="text-2xl">🏠</span>
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>
