@@ -14,6 +14,15 @@ export default function DreamNeighborhood() {
   const [copied, setCopied] = useState(false);
   const [showSnippet, setShowSnippet] = useState(false);
 
+  // Persistent subscription status (Ralty Candy partner example)
+  const subscriptionStatus = {
+    plan: "Professional",
+    partner: "Ralty Candy",
+    discount: "50% off first month",
+    daysLeft: 11,
+    status: "active"
+  };
+
   const generateSnippet = () => {
     const code = `<script src="https://cdn.dreamneighborhood.com/popup.js" data-domain="${domain}" async></script>`;
     setSnippet(code);
@@ -79,37 +88,66 @@ export default function DreamNeighborhood() {
   ];
 
   const BenefitsSection = () => (
-    <div className="mt-16">
-      <div className="text-center mb-10">
-        <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-          <Shield className="w-4 h-4" /> SUBSCRIPTION BENEFITS
+    <div className="mt-8">
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-medium">
+            <Shield className="w-3.5 h-3.5" /> BENEFITS
+          </div>
+          <h3 className="text-xl font-semibold text-zinc-900 mt-1">Why Subscribe?</h3>
         </div>
-        <h2 className="text-3xl font-semibold text-zinc-900">Why Subscribe to Dream Neighborhood?</h2>
-        <p className="text-zinc-600 mt-3 max-w-md mx-auto">Unlock powerful tools that transform how you attract, engage, and close real estate buyers.</p>
+        <Button variant="outline" size="sm" className="text-emerald-700 border-emerald-200 hover:bg-emerald-50 text-xs h-8">
+          View All Plans
+        </Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         {benefits.map((benefit, index) => (
-          <Card key={index} className="group hover:shadow-xl transition-all duration-300 border-emerald-100 hover:border-emerald-200 overflow-hidden">
-            <CardContent className="p-8">
-              <div className="mb-6 flex justify-center">
-                <div className="w-16 h-16 bg-emerald-50 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform">
+          <Card key={index} className="group hover:shadow-md transition-all border-emerald-100 hover:border-emerald-200">
+            <CardContent className="p-5">
+              <div className="flex items-start gap-4">
+                <div className="mt-0.5 flex-shrink-0 w-9 h-9 bg-emerald-50 rounded-2xl flex items-center justify-center">
                   {benefit.icon}
                 </div>
-              </div>
-              <div className="text-center">
-                <div className="font-semibold text-xl text-zinc-900 mb-2">{benefit.title}</div>
-                <div className="text-emerald-600 font-mono text-2xl font-bold mb-3 tracking-tighter">{benefit.stat}</div>
-                <p className="text-zinc-600 text-sm leading-relaxed">{benefit.desc}</p>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-base text-zinc-900 leading-tight">{benefit.title}</div>
+                  <div className="text-emerald-600 font-mono text-lg font-bold tracking-tighter mt-0.5">{benefit.stat}</div>
+                  <p className="text-zinc-500 text-xs leading-tight line-clamp-2 mt-2">{benefit.desc}</p>
+                </div>
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
-      <div className="mt-10 text-center">
-        <Button className="bg-emerald-600 hover:bg-emerald-700 text-lg px-10 h-14 rounded-2xl">
-          Start Your Free 14-Day Trial
+      <div className="mt-6 flex justify-center">
+        <Button className="bg-emerald-600 hover:bg-emerald-700 text-sm px-8 h-9 rounded-xl shadow-sm">
+          Activate Full Benefits
         </Button>
-        <p className="text-xs text-zinc-500 mt-4">Cancel anytime. No credit card required to start.</p>
+      </div>
+    </div>
+  );
+
+  const SubscriptionStatusBar = () => (
+    <div className="bg-[#0A6B5F] text-white px-8 py-2.5 flex items-center justify-between text-sm border-b border-white/20">
+      <div className="flex items-center gap-6">
+        <div className="flex items-center gap-2">
+          <Badge className="bg-emerald-400 text-[#0A6B5F] text-[10px] px-2 py-px font-medium">PRO</Badge>
+          <span className="font-medium">{subscriptionStatus.plan} Plan</span>
+        </div>
+        <div className="flex items-center gap-2 text-emerald-200 text-xs">
+          <span>via</span>
+          <span className="font-medium text-white">{subscriptionStatus.partner}</span>
+          <span className="bg-amber-400/30 px-2 py-0.5 rounded text-amber-200 text-[10px]">{subscriptionStatus.discount}</span>
+        </div>
+      </div>
+      <div className="flex items-center gap-4 text-xs">
+        <div className="flex items-center gap-1.5">
+          <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+          {subscriptionStatus.status.toUpperCase()}
+        </div>
+        <div>{subscriptionStatus.daysLeft} days left in trial</div>
+        <Button size="sm" variant="secondary" className="bg-white/10 hover:bg-white/20 text-white text-xs h-7 px-4 border-0">
+          Manage Subscription
+        </Button>
       </div>
     </div>
   );
@@ -119,97 +157,72 @@ export default function DreamNeighborhood() {
       case 'self-serve':
         return (
           <div className="max-w-5xl mx-auto">
-            <div className="mb-12">
-              <div className="inline-flex items-center gap-3 bg-emerald-100 text-emerald-700 px-6 py-2 rounded-3xl mb-6">
-                <Zap className="w-5 h-5" />
-                <span className="font-semibold tracking-wide">SELF-SERVE</span>
+            <div className="mb-8">
+              <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-1 rounded-3xl mb-3 text-sm">
+                <Zap className="w-4 h-4" />
+                SELF-SERVE
               </div>
-              <h1 className="text-5xl font-semibold text-zinc-900 tracking-tighter">Get Your Popup Live in Minutes</h1>
-              <p className="text-zinc-600 mt-4 text-xl max-w-2xl">Install our intelligent neighborhood popup on your website. No redesign. Instant value for buyers. All the subscription benefits unlocked.</p>
+              <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight">Install Popup in &lt; 5 mins</h1>
+              <p className="text-zinc-600 mt-2 text-base max-w-xl">Add the neighborhood intelligence to your site. No redesign needed. All benefits included.</p>
             </div>
 
-            <div className="grid grid-cols-12 gap-8">
-              {/* Enhanced Self-Serve Card */}
+            <div className="grid grid-cols-12 gap-6">
               <div className="col-span-12 lg:col-span-7">
-                <Card className="shadow-xl border-0 bg-white overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-10">
-                    <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 bg-white/20 backdrop-blur rounded-3xl flex items-center justify-center">
-                        <Zap className="w-8 h-8" />
+                <Card className="shadow border-emerald-100">
+                  <CardHeader className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white pb-6 pt-6">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 bg-white/20 rounded-2xl flex items-center justify-center">
+                        <Zap className="w-5 h-5" />
                       </div>
                       <div>
-                        <CardTitle className="text-white text-3xl">Self-Serve Installation</CardTitle>
-                        <CardDescription className="text-emerald-100 text-lg">Add the popup to your own real estate website</CardDescription>
+                        <CardTitle className="text-white text-2xl">Self-Serve Setup</CardTitle>
+                        <p className="text-emerald-100 text-sm">yourwebsite.com</p>
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent className="p-10 space-y-10">
+                  <CardContent className="p-6 space-y-6">
                     <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-mono text-sm">1</div>
-                        <label className="text-xl font-semibold text-zinc-900">Enter your website domain</label>
-                      </div>
-                      <div className="flex gap-4">
+                      <div className="text-xs uppercase tracking-widest text-zinc-500 mb-2">STEP 1 — DOMAIN</div>
+                      <div className="flex gap-3">
                         <input 
                           type="text" 
                           value={domain} 
                           onChange={(e) => setDomain(e.target.value)}
-                          className="flex-1 border-2 border-zinc-200 focus:border-emerald-600 rounded-3xl px-8 py-5 text-lg font-mono shadow-sm"
+                          className="flex-1 border border-zinc-300 focus:border-emerald-600 rounded-2xl px-5 py-3 text-base font-mono"
                           placeholder="yourwebsite.com"
                         />
-                        <Button onClick={generateSnippet} size="lg" className="bg-emerald-600 hover:bg-emerald-700 px-12 text-lg h-[62px] rounded-3xl">
-                          Generate Script
+                        <Button onClick={generateSnippet} className="bg-emerald-600 hover:bg-emerald-700 px-8 text-sm h-11 rounded-2xl">
+                          Generate
                         </Button>
                       </div>
                     </div>
 
                     {showSnippet && (
-                      <div className="bg-zinc-950 text-emerald-300 p-10 rounded-3xl font-mono text-sm border border-emerald-900 shadow-inner relative overflow-hidden">
-                        <div className="flex justify-between items-center mb-6 text-emerald-400 text-xs tracking-[2px] uppercase">
-                          <div>INSTALLATION CODE - COPY &amp; PASTE</div>
-                          <button onClick={copyToClipboard} className="flex items-center gap-2 hover:text-emerald-100 transition-colors px-4 py-1.5 rounded-xl hover:bg-white/10">
-                            {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                            {copied ? 'COPIED ✓' : 'COPY CODE'}
+                      <div className="bg-zinc-900 text-emerald-200 p-5 rounded-2xl text-xs font-mono border border-emerald-800">
+                        <div className="flex justify-between text-[10px] text-emerald-400 mb-3">
+                          <div>SCRIPT TAG</div>
+                          <button onClick={copyToClipboard} className="flex items-center gap-1 hover:text-white">
+                            {copied ? '✓ COPIED' : 'COPY'}
                           </button>
                         </div>
-                        <pre className="whitespace-pre-wrap text-emerald-200 bg-black/50 p-6 rounded-2xl mb-6 text-[13px] leading-relaxed border border-white/10">{snippet}</pre>
-                        <p className="text-xs text-emerald-500/80">Add this script tag just before the closing &lt;/body&gt; tag on every page of your site.</p>
+                        <pre className="text-emerald-300 text-[11px] overflow-auto">{snippet}</pre>
                       </div>
                     )}
 
-                    <div className="pt-6 border-t border-zinc-100">
-                      <Button className="w-full h-16 text-lg bg-gradient-to-r from-emerald-600 to-teal-600 hover:brightness-110 rounded-3xl shadow-lg">
-                        Install &amp; Activate Subscription • 14-Day Free Trial
-                      </Button>
-                      <p className="text-center text-xs text-zinc-500 mt-4">Unlocks all benefits including SEO boosts, lead gen, and analytics</p>
-                    </div>
+                    <Button className="w-full h-11 bg-emerald-600 hover:bg-emerald-700 text-sm rounded-2xl">
+                      Install + Activate Trial
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Benefits Teaser Sidebar */}
               <div className="col-span-12 lg:col-span-5">
-                <Card className="h-full shadow-xl border-emerald-100 bg-gradient-to-br from-zinc-50 to-white">
-                  <CardHeader>
-                    <CardTitle className="text-2xl flex items-center gap-3">
-                      <Award className="text-amber-500" /> What You Get
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-6 pt-2">
-                    <div className="space-y-4">
-                      {benefits.slice(0, 4).map((b, i) => (
-                        <div key={i} className="flex gap-4">
-                          <div className="text-emerald-500 mt-1">{b.icon}</div>
-                          <div>
-                            <div className="font-medium text-zinc-900">{b.title}</div>
-                            <div className="text-sm text-zinc-500 line-clamp-2">{b.desc}</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <Button variant="outline" className="w-full border-emerald-200 text-emerald-700 hover:bg-emerald-50">
-                      See All 6 Benefits Below ↓
-                    </Button>
+                <Card className="h-full border-emerald-100">
+                  <CardContent className="p-6 text-center">
+                    <div className="text-emerald-600 text-xs font-medium tracking-widest mb-4">YOUR SUBSCRIPTION STATUS</div>
+                    <div className="text-4xl font-semibold text-zinc-900 mb-1">Active</div>
+                    <div className="text-emerald-600">Professional via Ralty Candy • 50% off month 1</div>
+                    <div className="mt-8 text-xs text-zinc-500">11 days remaining in trial</div>
                   </CardContent>
                 </Card>
               </div>
@@ -222,70 +235,61 @@ export default function DreamNeighborhood() {
       case 'partners':
         return (
           <div className="max-w-5xl mx-auto">
-            <div className="mb-12">
-              <div className="inline-flex items-center gap-3 bg-amber-100 text-amber-700 px-6 py-2 rounded-3xl mb-6">
-                <Users className="w-5 h-5" />
-                <span className="font-semibold tracking-wide">PARTNER NETWORK</span>
+            <div className="mb-8">
+              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-1 rounded-3xl mb-3 text-sm">
+                <Users className="w-4 h-4" />
+                PARTNER
               </div>
-              <h1 className="text-5xl font-semibold text-zinc-900 tracking-tighter">Partner-Powered Neighborhood Experience</h1>
-              <p className="text-zinc-600 mt-4 text-xl max-w-2xl">Your website partner has integrated Dream Neighborhood. Activate your account to deliver premium buyer experiences and unlock all subscription benefits.</p>
+              <h1 className="text-3xl font-semibold text-zinc-900 tracking-tight">Ralty Candy Partnership</h1>
+              <p className="text-zinc-600 mt-1">Your partner has embedded the popup. Activate to unlock full features.</p>
             </div>
 
-            <div className="grid grid-cols-12 gap-8">
+            <div className="grid grid-cols-12 gap-6">
               <div className="col-span-12 lg:col-span-7">
-                <Card className="shadow-xl border-0 overflow-hidden">
-                  <CardHeader className="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-12">
-                    <div className="flex justify-center mb-8">
-                      <div className="w-24 h-24 bg-white/10 backdrop-blur-3xl rounded-full flex items-center justify-center border border-white/30">
-                        <Users className="w-12 h-12" />
-                      </div>
+                <Card className="shadow border-amber-200 overflow-hidden">
+                  <CardHeader className="bg-gradient-to-r from-amber-500 to-orange-600 text-white p-8">
+                    <div className="flex justify-center mb-6">
+                      <div className="w-16 h-16 bg-white/20 rounded-3xl flex items-center justify-center text-4xl">🍭</div>
                     </div>
-                    <CardTitle className="text-center text-4xl text-white">Your Popup is Already Installed</CardTitle>
-                    <CardDescription className="text-center text-amber-100 text-xl mt-4 max-w-md mx-auto">Your development partner embedded the neighborhood intelligence directly into your site.</CardDescription>
+                    <CardTitle className="text-center text-3xl">Ralty Candy</CardTitle>
+                    <p className="text-center text-amber-100 mt-2">Premier Integration Partner</p>
                   </CardHeader>
-                  <CardContent className="p-12 space-y-8 text-center">
-                    <div className="mx-auto max-w-xs">
-                      <div className="text-emerald-600 font-semibold text-sm tracking-widest mb-3">READY TO ACTIVATE</div>
-                      <h3 className="text-3xl font-semibold text-zinc-900 mb-6">Unlock Full Features &amp; All Subscription Benefits</h3>
-                      <p className="text-zinc-600 leading-relaxed mb-10">Instant access to neighborhood explorer, AI lead qualification, detailed reports, and the powerful benefits that drive more closings.</p>
+                  <CardContent className="p-8">
+                    <div className="text-center mb-8">
+                      <div className="inline bg-emerald-100 text-emerald-700 text-xs px-5 py-2 rounded-3xl font-medium">50% OFF FIRST MONTH</div>
+                      <div className="mt-6 text-2xl font-semibold text-zinc-900">Your popup is ready</div>
+                      <p className="text-zinc-600 mt-3">Activate now to access Neighborhood Explorer, AI leads, reports, and all subscription benefits.</p>
                     </div>
                     
-                    <Button className="w-full h-16 text-xl bg-gradient-to-r from-amber-600 to-orange-600 hover:brightness-110 rounded-3xl shadow-xl text-white">
-                      Activate Full Experience Now
+                    <Button className="w-full h-12 bg-gradient-to-r from-emerald-600 to-teal-600 text-lg rounded-2xl mb-6">
+                      Activate Full Experience
                     </Button>
                     
-                    <div className="pt-8 border-t flex justify-center">
-                      <div className="text-xs bg-white border border-amber-200 text-amber-700 px-6 py-3 rounded-2xl flex items-center gap-2">
-                        💡 Your partner can apply special discounts or extend your trial
-                      </div>
+                    <div className="text-center text-xs text-zinc-500">
+                      Special offer from Ralty Candy • Trial extended if needed
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
               <div className="col-span-12 lg:col-span-5">
-                <Card className="h-full shadow-xl border-amber-100">
-                  <CardHeader className="bg-amber-50">
-                    <CardTitle className="text-amber-800 flex items-center gap-3">
-                      <Shield className="w-6 h-6" /> Partner Benefits
-                    </CardTitle>
+                <Card className="h-full border-emerald-100">
+                  <CardHeader>
+                    <CardTitle className="text-lg">Partner Perks</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-8 space-y-8">
-                    <div className="text-sm text-zinc-600 space-y-6">
-                      <div className="flex gap-4">
-                        <div className="text-2xl">🏗️</div>
-                        <div>Seamless integration without touching your existing design</div>
-                      </div>
-                      <div className="flex gap-4">
-                        <div className="text-2xl">📈</div>
-                        <div>White-label options and revenue share opportunities</div>
-                      </div>
-                      <div className="flex gap-4">
-                        <div className="text-2xl">🤝</div>
-                        <div>Priority support and co-branded marketing materials</div>
-                      </div>
+                  <CardContent className="space-y-5 text-sm">
+                    <div className="flex gap-3 text-zinc-600">
+                      <div className="text-xl mt-px">🏗️</div>
+                      <div>Seamless integration already completed</div>
                     </div>
-                    <Button variant="outline" className="w-full border-amber-300 text-amber-700">Contact Partner Support</Button>
+                    <div className="flex gap-3 text-zinc-600">
+                      <div className="text-xl mt-px">📈</div>
+                      <div>Immediate access to all premium analytics</div>
+                    </div>
+                    <div className="flex gap-3 text-zinc-600">
+                      <div className="text-xl mt-px">💰</div>
+                      <div className="font-medium">50% discount applied for first month</div>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -298,69 +302,43 @@ export default function DreamNeighborhood() {
       case 'explorer':
       case 'explorers':
         return (
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-12 flex justify-between items-end">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
               <div>
-                <h1 className="text-5xl font-semibold tracking-tighter text-zinc-900">Neighborhood Explorer</h1>
-                <p className="text-xl text-zinc-600 mt-3">Interactive maps and insights powered by your subscription benefits</p>
+                <h1 className="text-3xl font-semibold tracking-tight">Neighborhood Explorer</h1>
+                <p className="text-sm text-zinc-500">Live data • Powered by your Professional plan</p>
               </div>
-              <Badge className="bg-emerald-600 text-white px-6 py-2 text-sm">LIVE DATA</Badge>
+              <Badge className="bg-emerald-600">LIVE</Badge>
             </div>
             
-            <div className="grid grid-cols-12 gap-6">
-              {/* Mock Map Area */}
+            <div className="grid grid-cols-12 gap-5">
               <div className="col-span-12 lg:col-span-8">
-                <Card className="overflow-hidden border-0 shadow-2xl h-[520px] bg-zinc-900 relative flex items-center justify-center">
-                  <div className="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] [background-size:20px_20px]"></div>
-                  <div className="text-center z-10">
-                    <div className="mx-auto w-32 h-32 bg-white/10 backdrop-blur rounded-3xl flex items-center justify-center mb-8 border border-white/20">
-                      <Map className="w-16 h-16 text-white" />
-                    </div>
-                    <h3 className="text-white text-3xl font-medium">Interactive Neighborhood Map</h3>
-                    <p className="text-emerald-300 mt-3 max-w-xs mx-auto">Hover, filter by schools, crime, amenities, comps. Powered by real-time data from your subscription.</p>
-                    <Button className="mt-10 bg-white text-zinc-900 hover:bg-white/90">Launch Full Explorer</Button>
-                  </div>
-                  <div className="absolute bottom-8 left-8 bg-black/70 text-white text-xs px-4 py-2 rounded-2xl flex items-center gap-2">
-                    <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
-                    247 Properties Analyzed
+                <Card className="h-80 bg-zinc-900 relative overflow-hidden flex items-center justify-center border-0">
+                  <div className="absolute inset-0 bg-[radial-gradient(#ffffff15_1px,transparent_1px)] [background-size:24px]"></div>
+                  <div className="text-center z-10 px-8">
+                    <Map className="w-12 h-12 text-white mx-auto mb-4" />
+                    <div className="text-white text-xl font-medium">Interactive Map Ready</div>
+                    <p className="text-emerald-300 text-sm mt-2">Filter schools, amenities, comps. 247 properties analyzed.</p>
                   </div>
                 </Card>
               </div>
-              
-              {/* Sidebar Stats with Benefits */}
-              <div className="col-span-12 lg:col-span-4 space-y-6">
-                <Card className="p-8">
-                  <div className="flex justify-between mb-6">
-                    <div>
-                      <div className="text-xs uppercase tracking-widest text-zinc-500">THIS MONTH</div>
-                      <div className="text-5xl font-semibold text-emerald-600 mt-1">184</div>
-                      <div className="text-sm text-zinc-600">Buyer Interactions</div>
-                    </div>
-                    <TrendingUp className="w-10 h-10 text-emerald-500" />
+              <div className="col-span-12 lg:col-span-4 space-y-5">
+                <Card className="p-5">
+                  <div className="text-xs text-zinc-500">THIS MONTH</div>
+                  <div className="text-4xl font-semibold text-emerald-600 mt-1">184</div>
+                  <div className="text-xs text-zinc-500">Buyer sessions</div>
+                  <div className="mt-4 h-1.5 bg-emerald-100 rounded">
+                    <div className="h-1.5 w-3/4 bg-emerald-500 rounded"></div>
                   </div>
-                  <div className="h-2 bg-zinc-100 rounded-full overflow-hidden">
-                    <div className="h-2 w-[73%] bg-emerald-500 rounded-full"></div>
-                  </div>
-                  <p className="text-xs text-emerald-600 mt-4">+42% from last month thanks to better engagement</p>
                 </Card>
-                
-                <Card className="p-8 bg-gradient-to-br from-emerald-50 to-white border-emerald-100">
-                  <h4 className="font-semibold mb-6 flex items-center gap-2 text-emerald-700">
-                    <Target className="w-5 h-5" /> Key Benefits in Action
-                  </h4>
-                  <div className="space-y-5 text-sm">
-                    <div className="flex justify-between items-center py-2 border-b">
-                      <span>Higher Quality Leads</span>
-                      <span className="font-mono text-emerald-600">87 qualified</span>
-                    </div>
-                    <div className="flex justify-between items-center py-2 border-b">
-                      <span>Engagement Rate</span>
-                      <span className="font-mono text-emerald-600">64%</span>
-                    </div>
-                    <div className="flex justify-between items-center py-2">
-                      <span>Showings Reduced</span>
-                      <span className="font-mono text-emerald-600">-31%</span>
-                    </div>
+                <Card className="p-5 text-sm">
+                  <div className="font-medium mb-4 flex items-center gap-2">
+                    <Target className="w-4 h-4 text-emerald-600" /> Benefits Impact
+                  </div>
+                  <div className="space-y-4 text-xs">
+                    <div className="flex justify-between"><span>Leads</span><span className="text-emerald-600 font-medium">87 qualified</span></div>
+                    <div className="flex justify-between"><span>Engagement</span><span className="text-emerald-600 font-medium">+64%</span></div>
+                    <div className="flex justify-between"><span>Showings</span><span className="text-amber-600 font-medium">-31%</span></div>
                   </div>
                 </Card>
               </div>
@@ -373,33 +351,35 @@ export default function DreamNeighborhood() {
       case 'reports':
         return (
           <div className="max-w-5xl mx-auto">
-            <div className="mb-12">
-              <h1 className="text-5xl font-semibold tracking-tighter">Performance Reports</h1>
-              <p className="mt-4 text-xl text-zinc-600">Track how your subscription is driving SEO gains, engagement, and lead quality.</p>
+            <div className="mb-6">
+              <h1 className="text-3xl font-semibold tracking-tight">Performance Reports</h1>
+              <p className="text-sm text-zinc-500">Real-time metrics powered by your Ralty Candy partnership</p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-3 gap-4 mb-8">
               {[
-                { label: "Website Sessions", value: "12,459", change: "+28%", color: "emerald" },
-                { label: "Qualified Leads", value: "347", change: "+41%", color: "emerald" },
-                { label: "Avg. Showings/Closing", value: "4.2", change: "-1.8", color: "amber" },
+                { label: "Sessions", value: "12.5k", change: "+28%" },
+                { label: "Qualified Leads", value: "347", change: "+41%" },
+                { label: "Showings/Close", value: "4.2", change: "-31%" },
               ].map((stat, i) => (
-                <Card key={i} className="p-8">
-                  <div className="text-sm text-zinc-500 mb-3">{stat.label}</div>
-                  <div className="text-6xl font-semibold text-zinc-900 tracking-tighter mb-1">{stat.value}</div>
-                  <div className={`text-sm font-medium ${stat.color === 'emerald' ? 'text-emerald-600' : 'text-amber-600'}`}>{stat.change} this month</div>
+                <Card key={i} className="p-5">
+                  <div className="text-xs text-zinc-500">{stat.label}</div>
+                  <div className="text-4xl font-semibold mt-2 text-zinc-900">{stat.value}</div>
+                  <div className="text-emerald-600 text-xs mt-1 font-medium">{stat.change}</div>
                 </Card>
               ))}
             </div>
-            
-            <Card className="p-10">
-              <h3 className="font-semibold text-xl mb-8 flex items-center gap-3"><BarChart3 className="w-6 h-6" /> Detailed Analytics Dashboard</h3>
-              <div className="h-80 bg-zinc-100 rounded-3xl flex items-center justify-center text-zinc-400 text-sm border border-dashed border-zinc-300">
-                [Beautiful Chart Visualizing SEO, Engagement, Lead Quality, and Showings Metrics]
+
+            <Card className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <div className="font-medium flex items-center gap-2"><BarChart3 className="w-4 h-4" />Analytics Overview</div>
+                <Badge variant="outline" className="text-xs">EXPORT</Badge>
               </div>
-              <p className="text-center text-xs text-zinc-500 mt-8">All metrics tied directly to your subscription benefits. Exportable reports available.</p>
+              <div className="h-52 bg-zinc-100 rounded-2xl flex items-center justify-center text-xs text-zinc-400 border border-dashed">
+                SEO • Engagement • Leads • Showings Chart
+              </div>
             </Card>
-            
+
             <BenefitsSection />
           </div>
         );
@@ -407,98 +387,80 @@ export default function DreamNeighborhood() {
       case 'leads':
         return (
           <div className="max-w-5xl mx-auto">
-            <div className="mb-12 flex items-center justify-between">
+            <div className="mb-6 flex justify-between items-center">
               <div>
-                <h1 className="text-5xl font-semibold tracking-tighter text-zinc-900">High-Quality Leads</h1>
-                <p className="text-xl text-zinc-600 mt-2">Leads generated through your neighborhood popup and subscription features.</p>
+                <h1 className="text-3xl font-semibold tracking-tight">High-Quality Leads</h1>
+                <p className="text-sm text-zinc-500">AI-qualified from popup interactions</p>
               </div>
-              <Button size="lg" className="bg-emerald-600">Export Leads CSV</Button>
+              <Button size="sm" className="bg-emerald-600 h-9 text-xs">Export CSV</Button>
             </div>
             
-            <div className="bg-white rounded-3xl shadow border p-2">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b text-left text-xs uppercase tracking-widest text-zinc-500">
-                    <th className="py-6 px-8 font-normal">Buyer Name</th>
-                    <th className="py-6 px-8 font-normal">Interest</th>
-                    <th className="py-6 px-8 font-normal">Engagement Score</th>
-                    <th className="py-6 px-8 font-normal">Source</th>
-                    <th className="py-6 px-8 font-normal">Status</th>
+            <Card className="overflow-hidden">
+              <table className="w-full text-sm">
+                <thead className="bg-zinc-50 border-b">
+                  <tr className="text-left text-xs text-zinc-500">
+                    <th className="px-6 py-4 font-normal">BUYER</th>
+                    <th className="px-6 py-4 font-normal">INTEREST</th>
+                    <th className="px-6 py-4 font-normal">SCORE</th>
+                    <th className="px-6 py-4 font-normal">SOURCE</th>
+                    <th className="px-6 py-4 font-normal">STATUS</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y text-sm">
+                <tbody>
                   {[
-                    ["Sarah Chen", "3BR in West Oaks", "94", "Popup", "Hot"],
-                    ["Michael Torres", "Investment Property", "87", "Explorer", "Warm"],
+                    ["Sarah Chen", "3BR West Oaks", "94", "Popup", "Hot"],
+                    ["Michael Torres", "Investment", "87", "Explorer", "Warm"],
                     ["Elena Rodriguez", "Downtown Loft", "91", "Popup", "Hot"],
                   ].map((row, i) => (
-                    <tr key={i} className="hover:bg-zinc-50">
-                      {row.map((cell, j) => (
-                        <td key={j} className="py-6 px-8 font-medium">{cell}</td>
-                      ))}
-                      <td className="py-6 px-8">
-                        <Badge variant={i === 0 || i === 2 ? "default" : "secondary"} className={i === 0 || i === 2 ? "bg-emerald-600" : ""}>
-                          {row[4]}
-                        </Badge>
+                    <tr key={i} className="border-b last:border-0 hover:bg-zinc-50">
+                      <td className="px-6 py-4 font-medium">{row[0]}</td>
+                      <td className="px-6 py-4 text-zinc-600">{row[1]}</td>
+                      <td className="px-6 py-4 font-mono text-emerald-600">{row[2]}</td>
+                      <td className="px-6 py-4 text-xs text-zinc-500">{row[3]}</td>
+                      <td className="px-6 py-4">
+                        <Badge className={i % 2 === 0 ? "bg-emerald-600" : ""}>{row[4]}</Badge>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-            </div>
-            
-            <div className="mt-12">
-              <BenefitsSection />
-            </div>
+            </Card>
+
+            <BenefitsSection />
           </div>
         );
 
       case 'subscription':
         return (
-          <div className="max-w-4xl mx-auto pt-8">
-            <div className="text-center mb-16">
-              <Badge variant="outline" className="mb-6 text-emerald-700 border-emerald-200">PREMIUM PLAN</Badge>
-              <h1 className="text-6xl font-semibold tracking-tighter">Choose Your Plan</h1>
-              <p className="mt-6 text-xl text-zinc-600 max-w-md mx-auto">Every plan includes the core benefits that drive your business forward.</p>
+          <div className="max-w-4xl mx-auto">
+            <div className="mb-8 text-center">
+              <div className="inline-flex px-4 py-1 bg-emerald-100 text-emerald-700 rounded-3xl text-sm font-medium mb-3">CURRENT PLAN</div>
+              <h1 className="text-3xl font-semibold">Professional • via Ralty Candy</h1>
+              <p className="text-emerald-600 mt-1">50% off first month • 11 days remaining</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-3 gap-5">
               {[
-                { name: "Starter", price: "49", popular: false, features: ["Basic popup", "1 neighborhood", "Basic leads", "Email support"] },
-                { name: "Professional", price: "149", popular: true, features: ["Full popup + explorer", "Unlimited neighborhoods", "AI lead scoring", "Priority support", "All benefits included"] },
-                { name: "Enterprise", price: "399", popular: false, features: ["Everything in Pro", "White label", "API access", "Dedicated manager", "Custom integrations"] },
-              ].map((plan, index) => (
-                <Card key={index} className={`relative ${plan.popular ? 'border-emerald-500 shadow-2xl scale-[1.03]' : ''}`}>
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs px-6 py-1 rounded-full font-medium">MOST POPULAR</div>
-                  )}
-                  <CardHeader className="text-center pt-10">
-                    <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                    <div className="mt-6 flex items-baseline justify-center">
-                      <span className="text-7xl font-semibold tracking-tighter">${plan.price}</span>
-                      <span className="text-zinc-500 ml-2">/mo</span>
-                    </div>
+                { name: "Starter", price: "49", active: false },
+                { name: "Professional", price: "149", active: true },
+                { name: "Enterprise", price: "399", active: false },
+              ].map((plan) => (
+                <Card key={plan.name} className={plan.active ? "ring-2 ring-emerald-600 shadow-md" : ""}>
+                  <CardHeader className="text-center pb-4">
+                    <CardTitle className={plan.active ? "text-emerald-700" : ""}>{plan.name}</CardTitle>
+                    <div className="text-4xl font-semibold mt-3">${plan.price}<span className="text-base font-normal text-zinc-400">/mo</span></div>
                   </CardHeader>
-                  <CardContent className="px-10 pb-10">
-                    <ul className="space-y-4 mb-10 text-sm">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-3">
-                          <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button className={`w-full h-14 rounded-2xl text-base ${plan.popular ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-zinc-900 hover:bg-zinc-800'}`}>
-                      {plan.popular ? 'Start 14-Day Free Trial' : 'Subscribe Now'}
+                  <CardContent className="px-6 pb-6 text-center">
+                    {plan.active && <div className="text-xs bg-emerald-100 text-emerald-700 inline-block px-6 py-1 rounded-3xl mb-6">ACTIVE • 50% OFF</div>}
+                    <Button className={`w-full text-sm h-9 rounded-2xl ${plan.active ? 'bg-emerald-600' : 'bg-zinc-900'}`}>
+                      {plan.active ? 'Manage' : 'Upgrade'}
                     </Button>
                   </CardContent>
                 </Card>
               ))}
             </div>
-            
-            <div className="mt-20">
-              <BenefitsSection />
-            </div>
+
+            <BenefitsSection />
           </div>
         );
 
@@ -613,8 +575,11 @@ export default function DreamNeighborhood() {
         </div>
 
         {/* Main Content */}
-        <div className="flex-1 p-10 overflow-auto bg-zinc-50">
-          {renderContent()}
+        <div className="flex-1 flex flex-col overflow-hidden bg-zinc-50">
+          <SubscriptionStatusBar />
+          <div className="flex-1 p-6 overflow-auto">
+            {renderContent()}
+          </div>
         </div>
       </div>
     </div>
