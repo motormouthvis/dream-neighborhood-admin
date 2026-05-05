@@ -111,12 +111,12 @@ export default function SelfServeContent() {
           {/* Left — pitch */}
           <div className="flex flex-col">
             <div className="inline-flex items-center gap-1.5 self-start bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase mb-4">
-              <Sparkles className="w-3 h-3" /> Activate Your Popup
+              <Sparkles className="w-3 h-3" /> Your Popup
             </div>
             <h2 className="text-3xl font-bold text-white tracking-tight leading-tight mb-3">
-              Add neighborhood data
+              Live across
               <br />
-              to your site.
+              your site.
             </h2>
             <p className="text-emerald-50/90 text-sm leading-relaxed mb-5">
               One script. Every platform. Edits go live instantly — no redeploys, no
@@ -125,62 +125,54 @@ export default function SelfServeContent() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>Install in under 5 minutes</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm text-emerald-50">
-                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>Works on Squarespace, Wix, WordPress and more</span>
+                <span>Works on every site builder</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
                 <span>Updates go live automatically</span>
               </div>
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>AI-qualified leads delivered to your inbox</span>
+              </div>
             </div>
           </div>
 
-          {/* Right — install script */}
-          <div className="flex flex-col bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-5 shadow-inner shadow-emerald-950/10">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-white/15 border border-white/25 rounded-md flex items-center justify-center">
-                  <Zap className="w-3 h-3 text-emerald-100" />
+          {/* Right — Live status + headline metrics */}
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 shadow-inner shadow-emerald-950/10">
+            <div className="flex items-center justify-center mb-5">
+              <div className="inline-flex items-center gap-1.5 bg-emerald-400/15 border border-emerald-300/30 px-2.5 py-1 rounded-full">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-300"></span>
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-emerald-100">
+                  Popup is Live
+                </span>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
+                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
+                  12,847
                 </div>
-                <div>
-                  <div className="text-[11px] font-bold tracking-[0.18em] uppercase text-emerald-100">
-                    Install Script
-                  </div>
-                  <div className="text-[10px] text-emerald-100/70">
-                    Paste before &lt;/body&gt; on every page
-                  </div>
+                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
+                  Total Views
                 </div>
               </div>
-              <span className="text-[9px] text-emerald-100 bg-emerald-400/15 border border-emerald-300/30 px-2 py-0.5 rounded-full font-semibold tracking-wider uppercase">
-                One-time
-              </span>
+              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
+                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
+                  24
+                </div>
+                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
+                  Total Pages
+                </div>
+              </div>
             </div>
-            <div className="bg-emerald-950/40 border border-emerald-300/15 rounded-xl px-3.5 py-3 font-mono text-[11px] text-emerald-100 overflow-auto leading-relaxed">
-              {STATIC_SCRIPT}
-            </div>
-            <button
-              onClick={copyScript}
-              className={`mt-3 w-full h-12 text-base font-semibold rounded-xl shadow-lg shadow-emerald-950/30 transition-all hover:shadow-xl flex items-center justify-center gap-2 ${
-                copied
-                  ? "bg-emerald-400 text-[#053b34] hover:bg-emerald-300"
-                  : "bg-white text-[#0A6B5F] hover:bg-emerald-50"
-              }`}
-            >
-              {copied ? (
-                <>
-                  <Check className="w-5 h-5" /> Copied to clipboard
-                </>
-              ) : (
-                <>
-                  <Copy className="w-5 h-5" /> Copy Install Script
-                </>
-              )}
-            </button>
-            <div className="text-center mt-3 text-[11px] text-emerald-100/70">
-              Edits to your popup update automatically — no need to re-paste
+            <div className="text-center mt-5 text-[11px] text-emerald-100/70 leading-relaxed">
+              Live on your site — and right here.
+              <br />
+              Try it in the bottom-right corner ↘
             </div>
           </div>
         </div>
@@ -230,33 +222,76 @@ export default function SelfServeContent() {
             </CardContent>
           </Card>
 
-          {/* Customize popup */}
+          {/* Customize popup + one-time install script */}
           <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
-                <Settings2 className="w-5 h-5" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm text-zinc-900">Customize your popup</div>
-                <div className="text-xs text-zinc-600">
-                  Default address, accent color, data shown, lead form, position, tooltip,
-                  and more.
+            <CardContent className="p-5">
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
+                  <Settings2 className="w-5 h-5" />
                 </div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-sm text-zinc-900">
+                    Customize your popup
+                  </div>
+                  <div className="text-xs text-zinc-600">
+                    Default address, accent color, data shown, lead form, position, tooltip,
+                    and more.
+                  </div>
+                </div>
+                <Link
+                  href="/popup-settings"
+                  className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+                >
+                  Edit Popup <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
-              <Link
-                href="/popup-settings"
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
-              >
-                Edit Popup <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
+
+              <div className="mt-4 pt-4 border-t border-zinc-100">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <Zap className="w-3.5 h-3.5 text-emerald-600" />
+                    <div className="text-xs font-semibold text-zinc-900">
+                      One-time installation script
+                    </div>
+                    <span className="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full font-medium">
+                      Install once
+                    </span>
+                  </div>
+                  <button
+                    onClick={copyScript}
+                    className={`flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-lg transition-colors ${
+                      copied
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-white text-emerald-700 border border-emerald-200 hover:bg-emerald-50"
+                    }`}
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5" /> Copied
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" /> Copy
+                      </>
+                    )}
+                  </button>
+                </div>
+                <div className="bg-zinc-50 border border-zinc-200 rounded-xl px-4 py-2.5 font-mono text-[11px] text-zinc-800 overflow-auto">
+                  {STATIC_SCRIPT}
+                </div>
+                <p className="text-[10px] text-zinc-500 mt-2">
+                  Paste before the closing &lt;/body&gt; tag on every page. Edits to your
+                  popup settings update automatically — no need to change the script.
+                </p>
+              </div>
             </CardContent>
           </Card>
 
-          {/* Book a meeting */}
+          {/* Have Questions? — compact */}
           <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
-            <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
-                <Calendar className="w-5 h-5" />
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
+                <Calendar className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm text-zinc-900">
@@ -270,7 +305,7 @@ export default function SelfServeContent() {
                 href="https://dreamneighborhood.com/book-a-call"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
               >
                 Book a Call <ExternalLink className="w-3 h-3" />
               </a>
@@ -356,7 +391,7 @@ export default function SelfServeContent() {
           </Card>
 
           {/* Demo video — branded thumbnail, defers iframe load until click */}
-          <Card className="border border-zinc-200 shadow-sm overflow-hidden flex-1 flex flex-col">
+          <Card className="border border-zinc-200 shadow-sm overflow-hidden flex flex-col">
             <div className="aspect-video relative bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 flex-shrink-0">
               {videoPlaying ? (
                 <iframe
@@ -394,7 +429,7 @@ export default function SelfServeContent() {
                 </button>
               )}
             </div>
-            <div className="p-4 flex items-center justify-between bg-white flex-1">
+            <div className="p-4 flex items-center justify-between bg-white">
               <div>
                 <div className="font-semibold text-sm text-zinc-900">See it in action</div>
                 <div className="text-xs text-zinc-500">A quick tour of Dream Neighborhood</div>

@@ -17,7 +17,6 @@ import {
   Sparkles,
   Play,
   CheckCircle2,
-  ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -127,9 +126,9 @@ export default function PartnersContent() {
             </div>
           </div>
 
-          {/* Right — Live status + headline metric */}
+          {/* Right — Live status + headline metrics */}
           <div className="flex flex-col justify-center bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 shadow-inner shadow-emerald-950/10">
-            <div className="text-center">
+            <div className="flex items-center justify-center mb-5">
               <div className="inline-flex items-center gap-1.5 bg-emerald-400/15 border border-emerald-300/30 px-2.5 py-1 rounded-full">
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
@@ -139,23 +138,29 @@ export default function PartnersContent() {
                   Popup is Live
                 </span>
               </div>
-              <div className="mt-4 text-5xl font-bold text-white tracking-tight leading-none tabular-nums">
-                12,847
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
+                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
+                  12,847
+                </div>
+                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
+                  Total Views
+                </div>
               </div>
-              <div className="text-[11px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
-                Total Views
+              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
+                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
+                  24
+                </div>
+                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
+                  Total Pages
+                </div>
               </div>
             </div>
-            <a
-              href="https://dreamneighborhood.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 w-full h-12 bg-white text-[#0A6B5F] hover:bg-emerald-50 text-base font-semibold rounded-xl shadow-lg shadow-emerald-950/30 transition-shadow hover:shadow-xl flex items-center justify-center gap-2"
-            >
-              View Live Popup <ArrowUpRight className="w-4 h-4" />
-            </a>
-            <div className="text-center mt-3 text-[11px] text-emerald-100/70">
-              Embedded by Realty Candy on your site
+            <div className="text-center mt-5 text-[11px] text-emerald-100/70 leading-relaxed">
+              Live on your site — and right here.
+              <br />
+              Try it in the bottom-right corner ↘
             </div>
           </div>
         </div>
@@ -226,25 +231,23 @@ export default function PartnersContent() {
             </CardContent>
           </Card>
 
-          {/* Book a call — flex-1 to balance heights with column 2 */}
-          <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all flex-1">
-            <CardContent className="p-5 h-full flex items-center gap-4">
-              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
-                <Calendar className="w-5 h-5" />
+          {/* Have Questions? — compact */}
+          <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
+            <CardContent className="p-4 flex items-center gap-3">
+              <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
+                <Calendar className="w-4 h-4" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-semibold text-sm text-zinc-900">
-                  Have questions about your subscription?
-                </div>
+                <div className="font-semibold text-sm text-zinc-900">Have Questions?</div>
                 <div className="text-xs text-zinc-600">
-                  Book a free call with the team — Realty Candy clients get priority booking.
+                  Book a free call — Realty Candy clients get priority.
                 </div>
               </div>
               <a
                 href="https://dreamneighborhood.com/book-a-call"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
               >
                 Book a Call <ExternalLink className="w-3 h-3" />
               </a>
@@ -292,7 +295,7 @@ export default function PartnersContent() {
           </Card>
 
           {/* Demo video — branded thumbnail, defers iframe load until click */}
-          <Card className="border border-zinc-200 shadow-sm overflow-hidden flex-1 flex flex-col">
+          <Card className="border border-zinc-200 shadow-sm overflow-hidden flex flex-col">
             <div className="aspect-video relative bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 flex-shrink-0">
               {videoPlaying ? (
                 <iframe
@@ -330,7 +333,7 @@ export default function PartnersContent() {
                 </button>
               )}
             </div>
-            <div className="p-4 flex items-center justify-between bg-white flex-1">
+            <div className="p-4 flex items-center justify-between bg-white">
               <div>
                 <div className="font-semibold text-sm text-zinc-900">See it in action</div>
                 <div className="text-xs text-zinc-500">A quick tour of Dream Neighborhood</div>
