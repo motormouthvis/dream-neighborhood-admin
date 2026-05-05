@@ -98,22 +98,18 @@ export default function PartnersContent() {
               <div className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
                 🏠
               </div>
-              <div>
-                <div className="text-3xl font-bold text-white tracking-tight leading-none">
-                  Realty Candy
-                </div>
-                <div className="text-emerald-100/80 text-sm mt-1">Your website partner</div>
+              <div className="text-3xl font-bold text-white tracking-tight leading-none">
+                Realty Candy
               </div>
             </div>
             <p className="text-emerald-50/90 text-sm leading-relaxed mb-5">
-              The popup is already embedded on your site by Realty Candy. Subscribe to unlock
-              the explorer, AI lead qualification, reports, and all partner-exclusive
-              benefits.
+              The popup is already installed on your site by Realty Candy. Subscribe to
+              unlock your exclusive benefits.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>Pre-installed — no scripts to copy</span>
+                <span>Pre-installed — zero website changes needed</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
@@ -157,7 +153,7 @@ export default function PartnersContent() {
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-[11px] text-emerald-100/70 leading-relaxed">
+            <div className="text-center mt-5 text-sm text-emerald-100/85 leading-relaxed">
               Live on your site — and right here.
               <br />
               Try it in the bottom-right corner ↘
@@ -253,48 +249,8 @@ export default function PartnersContent() {
               </a>
             </CardContent>
           </Card>
-        </div>
 
-        {/* COLUMN 2 — right, 5/12 */}
-        <div className="col-span-12 lg:col-span-5 flex flex-col gap-5">
-          {/* Benefits */}
-          <Card className="border border-zinc-200 shadow-sm overflow-hidden bg-white">
-            <CardContent className="p-5">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
-                  <Shield className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-zinc-900 leading-tight">
-                    Subscription Benefits
-                  </div>
-                  <div className="text-[11px] text-zinc-500 leading-tight">
-                    What you get with your Team plan
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-2">
-                {benefits.map((b, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-br from-emerald-50/40 to-white border border-emerald-100/60 hover:border-emerald-200 transition-colors"
-                  >
-                    <div className="w-7 h-7 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                      {b.icon}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-semibold text-zinc-900 leading-tight">
-                        {b.title}
-                      </div>
-                      <p className="text-[11px] text-zinc-500 leading-snug mt-0.5">{b.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Demo video — branded thumbnail, defers iframe load until click */}
+          {/* Demo video — moved to column 1 to balance heights with the benefits panel on the right */}
           <Card className="border border-zinc-200 shadow-sm overflow-hidden flex flex-col">
             <div className="aspect-video relative bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 flex-shrink-0">
               {videoPlaying ? (
@@ -347,6 +303,41 @@ export default function PartnersContent() {
                 Open on YouTube <ExternalLink className="w-3 h-3" />
               </a>
             </div>
+          </Card>
+        </div>
+
+        {/* COLUMN 2 — right, 5/12 */}
+        <div className="col-span-12 lg:col-span-5 flex flex-col gap-5">
+          {/* Benefits — fills column 2 with breathing room since the video moved out */}
+          <Card className="border border-zinc-200 shadow-sm overflow-hidden bg-white flex-1">
+            <CardContent className="p-5 h-full flex flex-col">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
+                  <Shield className="w-3.5 h-3.5" />
+                </div>
+                <div className="text-sm font-semibold text-zinc-900 leading-tight">
+                  Subscription Benefits
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 flex-1">
+                {benefits.map((b, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 flex items-center gap-3 p-3.5 rounded-xl bg-gradient-to-br from-emerald-50/40 to-white border border-emerald-100/60 hover:border-emerald-200 transition-colors"
+                  >
+                    <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      {b.icon}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-zinc-900 leading-tight">
+                        {b.title}
+                      </div>
+                      <p className="text-xs text-zinc-500 leading-snug mt-1">{b.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
           </Card>
         </div>
       </div>

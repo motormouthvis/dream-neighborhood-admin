@@ -169,7 +169,7 @@ export default function SelfServeContent() {
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-[11px] text-emerald-100/70 leading-relaxed">
+            <div className="text-center mt-5 text-sm text-emerald-100/85 leading-relaxed">
               Live on your site — and right here.
               <br />
               Try it in the bottom-right corner ↘
@@ -358,13 +358,8 @@ export default function SelfServeContent() {
                 <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
                   <Shield className="w-3.5 h-3.5" />
                 </div>
-                <div>
-                  <div className="text-sm font-semibold text-zinc-900 leading-tight">
-                    Subscription Benefits
-                  </div>
-                  <div className="text-[11px] text-zinc-500 leading-tight">
-                    What you get with your Team plan
-                  </div>
+                <div className="text-sm font-semibold text-zinc-900 leading-tight">
+                  Subscription Benefits
                 </div>
               </div>
               <div className="space-y-2">
