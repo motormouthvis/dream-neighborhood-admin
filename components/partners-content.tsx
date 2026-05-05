@@ -88,10 +88,22 @@ export default function PartnersContent() {
                 Realty Candy
               </div>
             </div>
-            <p className="text-emerald-50/90 text-sm leading-relaxed mb-5">
+            <p className="text-emerald-50/90 text-sm leading-relaxed mb-4">
               The popup is already installed on your site by Realty Candy. Subscribe to
               unlock your exclusive benefits.
             </p>
+            <div className="mb-5 rounded-2xl bg-white/12 backdrop-blur-sm border border-white/25 px-4 py-3.5 shadow-inner shadow-black/5">
+              <div className="text-[10px] font-bold tracking-[0.15em] uppercase text-emerald-100 mb-1.5">
+                Exclusive Realty Candy offer
+              </div>
+              <p className="text-sm text-white font-medium leading-snug">
+                You&apos;re offered an exclusive <span className="text-emerald-100">50% off</span> your
+                first month — <span className="font-semibold">only $19 to try it for 30 days</span>.{" "}
+                <span className="text-emerald-50/90 font-normal">
+                  No long-term commitment; cancel anytime.
+                </span>
+              </p>
+            </div>
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
