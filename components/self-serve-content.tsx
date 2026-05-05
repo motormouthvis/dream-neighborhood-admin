@@ -23,6 +23,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+import HeroBannerRightPanel from "./hero-banner-right-panel";
+
 const STATIC_SCRIPT = `<script src="https://app.dreamneighborhood.com/explorer/sdk.js" async></script>`;
 
 const benefits = [
@@ -126,49 +128,7 @@ export default function SelfServeContent() {
             </div>
           </div>
 
-          {/* Right — Live status + headline metrics */}
-          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 shadow-inner shadow-emerald-950/10">
-            <div className="flex items-center justify-center mb-5">
-              <div className="inline-flex items-center gap-1.5 bg-emerald-400/15 border border-emerald-300/30 px-2.5 py-1 rounded-full">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-300"></span>
-                </span>
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-emerald-100">
-                  Popup is Live
-                </span>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
-                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
-                  12,847
-                </div>
-                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
-                  Total Views
-                </div>
-              </div>
-              <div className="text-center bg-white/5 border border-white/10 rounded-xl py-4 px-2">
-                <div className="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none tabular-nums">
-                  24
-                </div>
-                <div className="text-[10px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
-                  Total Pages
-                </div>
-              </div>
-            </div>
-            <div className="text-center mt-5 text-base text-emerald-100/88 leading-relaxed">
-              Live on your site — and right here.
-              <br />
-              Try it in the bottom-right corner{" "}
-              <span
-                className="inline-block text-lg motion-safe:animate-[corner-arrow-nudge_1.45s_ease-in-out_infinite]"
-                aria-hidden
-              >
-                ↘
-              </span>
-            </div>
-          </div>
+          <HeroBannerRightPanel />
         </div>
       </div>
 
