@@ -83,6 +83,7 @@ export default function PopupSettingsForm() {
   );
   const [onlyDetectedAddress, setOnlyDetectedAddress] = useState(true);
   const [searchPageForAddress, setSearchPageForAddress] = useState(false);
+  const [authorizedDomain, setAuthorizedDomain] = useState("");
   const [copied, setCopied] = useState(false);
 
   const copyScript = () => {
@@ -210,6 +211,25 @@ export default function PopupSettingsForm() {
                 The accent color of the explorer.
               </p>
             </div>
+          </div>
+
+          <div className="mt-5">
+            <label className="text-xs font-semibold text-zinc-700 mb-1.5 block">
+              Authorized Domain for Popup
+            </label>
+            <input
+              type="text"
+              value={authorizedDomain}
+              onChange={(e) => setAuthorizedDomain(e.target.value)}
+              placeholder="www.myrealestatewebsite.com"
+              className="w-full bg-emerald-50/30 border border-emerald-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500 focus:bg-white"
+              autoComplete="off"
+              spellCheck={false}
+            />
+            <p className="text-[11px] text-zinc-500 mt-1">
+              Enter your public site hostname only (no https:// or paths). Used to
+              authorize where the popup may load.
+            </p>
           </div>
 
           <div className="mt-5">
