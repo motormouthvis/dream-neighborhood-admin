@@ -124,10 +124,8 @@ export default function PartnersContent() {
           <HeroBannerRightPanel
             beforeBadge="Awaiting Subscription"
             beforeLines={{
-              line1:
-                "Your Premier partner has already added the Dream Neighborhood Explorer to your website",
-              line2:
-                "Once you have subscribed, views and pages will update showing increased website engagement",
+              line1: "Your premier partner already added the Explorer to your site.",
+              line2: "Subscribe to see views and pages update with engagement.",
             }}
           />
         </div>

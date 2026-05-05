@@ -15,8 +15,8 @@ type Props = {
 export default function HeroBannerRightPanel({
   beforeBadge = "Before install",
   beforeLines = {
-    line1: "Paste the Dream Neighborhood script on your site once.",
-    line2: "After it goes live, views and page counts appear here automatically.",
+    line1: "Add our one-line script to your site.",
+    line2: "Once the script is live, views and pages show up here.",
   },
 }: Props) {
   const [afterInstall, setAfterInstall] = useState(true);
@@ -81,7 +81,10 @@ export default function HeroBannerRightPanel({
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-base text-emerald-100/88 leading-relaxed">
+            <div className="mt-3 pt-3 border-t border-white/10 text-center text-[10px] text-emerald-200/65 uppercase tracking-[0.12em] font-semibold">
+              Click anywhere here to toggle preview
+            </div>
+            <div className="text-center mt-4 text-base text-emerald-100/88 leading-relaxed">
               Live on your site — and right here.
               <br />
               Try it in the bottom-right corner{" "}
@@ -121,7 +124,10 @@ export default function HeroBannerRightPanel({
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-sm text-emerald-100/90 leading-relaxed px-1">
+            <div className="mt-3 pt-3 border-t border-white/10 text-center text-[10px] text-emerald-200/65 uppercase tracking-[0.12em] font-semibold">
+              Click anywhere here to toggle preview
+            </div>
+            <div className="text-center mt-4 text-sm text-emerald-100/90 leading-relaxed px-1">
               <p>{beforeLines.line1}</p>
               {beforeLines.line2 ? (
                 <p className="mt-2 text-emerald-100/75">{beforeLines.line2}</p>
