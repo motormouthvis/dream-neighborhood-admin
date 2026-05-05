@@ -139,10 +139,16 @@ export default function PartnersContent() {
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-sm text-emerald-100/85 leading-relaxed">
+            <div className="text-center mt-5 text-base text-emerald-100/88 leading-relaxed">
               Live on your site — and right here.
               <br />
-              Try it in the bottom-right corner ↘
+              Try it in the bottom-right corner{" "}
+              <span
+                className="inline-block text-lg motion-safe:animate-[corner-arrow-nudge_1.45s_ease-in-out_infinite]"
+                aria-hidden
+              >
+                ↘
+              </span>
             </div>
           </div>
         </div>

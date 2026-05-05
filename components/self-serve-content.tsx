@@ -109,7 +109,7 @@ export default function SelfServeContent() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>Zero website design, low risk</span>
+                <span>Zero website redesign, low risk</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
@@ -157,10 +157,16 @@ export default function SelfServeContent() {
                 </div>
               </div>
             </div>
-            <div className="text-center mt-5 text-sm text-emerald-100/85 leading-relaxed">
+            <div className="text-center mt-5 text-base text-emerald-100/88 leading-relaxed">
               Live on your site — and right here.
               <br />
-              Try it in the bottom-right corner ↘
+              Try it in the bottom-right corner{" "}
+              <span
+                className="inline-block text-lg motion-safe:animate-[corner-arrow-nudge_1.45s_ease-in-out_infinite]"
+                aria-hidden
+              >
+                ↘
+              </span>
             </div>
           </div>
         </div>
