@@ -81,10 +81,7 @@ export default function HeroBannerRightPanel({
                 </div>
               </div>
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 text-center text-[10px] text-emerald-200/65 uppercase tracking-[0.12em] font-semibold">
-              Click anywhere here to toggle preview
-            </div>
-            <div className="text-center mt-4 text-base text-emerald-100/88 leading-relaxed">
+            <div className="text-center mt-5 text-base text-emerald-100/88 leading-relaxed">
               Live on your site — and right here.
               <br />
               Try it in the bottom-right corner{" "}
@@ -124,14 +121,20 @@ export default function HeroBannerRightPanel({
                 </div>
               </div>
             </div>
-            <div className="mt-3 pt-3 border-t border-white/10 text-center text-[10px] text-emerald-200/65 uppercase tracking-[0.12em] font-semibold">
-              Click anywhere here to toggle preview
-            </div>
-            <div className="text-center mt-4 text-sm text-emerald-100/90 leading-relaxed px-1">
+            <div className="text-center mt-5 text-sm text-emerald-100/90 leading-relaxed px-1">
               <p>{beforeLines.line1}</p>
               {beforeLines.line2 ? (
                 <p className="mt-2 text-emerald-100/75">{beforeLines.line2}</p>
               ) : null}
+            </div>
+            <div className="mt-5 pt-4 border-t border-white/10 text-center text-sm text-emerald-100/88 leading-relaxed">
+              Click anywhere here to toggle preview{" "}
+              <span
+                className="inline-block text-lg motion-safe:animate-[corner-arrow-nudge_1.45s_ease-in-out_infinite]"
+                aria-hidden
+              >
+                ↘
+              </span>
             </div>
           </>
         )}
