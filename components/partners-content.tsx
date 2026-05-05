@@ -108,6 +108,10 @@ export default function PartnersContent() {
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>Adds rich neighborhood data to all pages</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
                 <span>Pre-installed — zero website changes needed</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
