@@ -33,8 +33,7 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
       activeKey === "team-settings"
   );
 
-  // The "Dashboard" link is the top-level link of whatever page we're on
-  // (i.e. /self-serve or /partners), so we infer it from the pathname.
+  // The primary nav link goes to /self-serve or /partners depending on pathname.
   const dashboardHref =
     pathname?.startsWith("/partners") ? "/partners" : "/self-serve";
 
@@ -70,7 +69,7 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
               }`}
             >
               <LayoutDashboard className="w-5 h-5" />
-              Dashboard
+              Popup Dashboard
             </Link>
 
             <button

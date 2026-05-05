@@ -17,7 +17,6 @@ import {
   ExternalLink,
   Settings2,
   ChevronRight,
-  Sparkles,
   Play,
   CheckCircle2,
 } from "lucide-react";
@@ -81,20 +80,7 @@ export default function SelfServeContent() {
 
   return (
     <div className="max-w-6xl mx-auto">
-      {/* Page header */}
-      <div className="mb-6">
-        <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-3xl mb-2 text-xs font-medium">
-          <Zap className="w-3.5 h-3.5" /> SELF-SERVE
-        </div>
-        <h1 className="text-2xl font-semibold text-zinc-900 tracking-tight">
-          Dream Neighborhood Popup
-        </h1>
-        <p className="text-zinc-500 text-sm mt-1">
-          Install in under 5 minutes. Same simple script for every site.
-        </p>
-      </div>
-
-      {/* HERO — Activate your popup */}
+      {/* HERO — Neighborhood Explorer */}
       <div className="mb-5 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 shadow-xl shadow-emerald-900/25 ring-1 ring-emerald-900/10">
         <div
           className="absolute inset-0 opacity-15 pointer-events-none"
@@ -110,19 +96,21 @@ export default function SelfServeContent() {
         <div className="relative grid md:grid-cols-2 gap-6 p-7 md:p-8">
           {/* Left — pitch */}
           <div className="flex flex-col">
-            <div className="inline-flex items-center gap-1.5 self-start bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase mb-4">
-              <Sparkles className="w-3 h-3" /> Your Popup
-            </div>
             <h2 className="text-3xl font-bold text-white tracking-tight leading-tight mb-3">
-              Live across
-              <br />
-              your site.
+              Neighborhood Explorer Popup
             </h2>
+            <p className="text-lg text-emerald-100/95 font-medium leading-snug mb-3">
+              Live across every listing and neighborhood page on your site.
+            </p>
             <p className="text-emerald-50/90 text-sm leading-relaxed mb-5">
-              One script. Every platform. Edits go live instantly — no redeploys, no
-              maintenance.
+              Only takes one line of code added to your website. Auto detects property
+              addresses.
             </p>
             <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>Zero website design, low risk</span>
+              </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
                 <span>Works on every site builder</span>
@@ -133,7 +121,7 @@ export default function SelfServeContent() {
               </div>
               <div className="flex items-center gap-2 text-sm text-emerald-50">
                 <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
-                <span>AI-qualified leads delivered to your inbox</span>
+                <span>Qualified leads delivered to your inbox</span>
               </div>
             </div>
           </div>
