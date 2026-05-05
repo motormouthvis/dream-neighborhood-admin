@@ -356,6 +356,12 @@ export default function SelfServeContent() {
                   Subscription Benefits
                 </div>
               </div>
+              <p className="text-xs text-zinc-700 leading-snug mb-4 pb-4 border-b border-emerald-100/80">
+                Adds <span className="font-semibold text-emerald-800">38</span> elements of rich
+                neighborhood data to every listing page — far{" "}
+                <span className="whitespace-nowrap">more than Zillow</span> and{" "}
+                Realtor.com.
+              </p>
               <div className="space-y-2">
                 {benefits.map((b, i) => (
                   <div
