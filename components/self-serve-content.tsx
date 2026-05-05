@@ -289,7 +289,7 @@ export default function SelfServeContent() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="font-semibold text-sm text-zinc-900">
-                  Need help installing?
+                  Need support or help installing? It's free!
                 </div>
                 <div className="text-xs text-zinc-600">
                   Book a free 15-minute call — we'll install it for you.
