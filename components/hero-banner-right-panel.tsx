@@ -3,7 +3,9 @@
 import React, { useCallback, useState } from "react";
 
 type Props = {
-  /** Self-serve uses this line; partners can omit or we use a default */
+  /** Label for the pre-live state (e.g. partners: Awaiting Subscription) */
+  beforeBadge?: string;
+  /** Self-serve uses this line; partners pass partner-specific copy */
   beforeLines?: {
     line1: string;
     line2?: string;
@@ -11,6 +13,7 @@ type Props = {
 };
 
 export default function HeroBannerRightPanel({
+  beforeBadge = "Before install",
   beforeLines = {
     line1: "Paste the Dream Neighborhood script on your site once.",
     line2: "After it goes live, views and page counts appear here automatically.",
@@ -42,8 +45,8 @@ export default function HeroBannerRightPanel({
       aria-pressed={afterInstall}
       aria-label={
         afterInstall
-          ? "Showing dashboard after install. Click for before-install preview."
-          : "Showing before-install preview. Click for after-install live stats."
+          ? "Showing live metrics. Click to show the pre-live preview."
+          : "Showing pre-live preview. Click to show live metrics."
       }
     >
       <div className="flex flex-col flex-1 justify-center bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 shadow-inner shadow-emerald-950/10 cursor-pointer transition-all hover:bg-white/15 hover:border-white/25 active:scale-[0.995] outline-none focus-visible:ring-2 focus-visible:ring-emerald-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A6B5F]">
@@ -95,8 +98,8 @@ export default function HeroBannerRightPanel({
             <div className="flex items-center justify-center mb-5">
               <div className="inline-flex items-center gap-1.5 bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">
                 <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-200/90"></span>
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-emerald-50">
-                  Before install
+                <span className="text-[10px] font-bold tracking-wide text-emerald-50">
+                  {beforeBadge}
                 </span>
               </div>
             </div>
@@ -126,10 +129,6 @@ export default function HeroBannerRightPanel({
             </div>
           </>
         )}
-
-        <div className="mt-4 pt-3 border-t border-white/10 text-center text-[10px] text-emerald-200/65 uppercase tracking-[0.12em] font-semibold">
-          Click anywhere here to toggle preview
-        </div>
       </div>
     </div>
   );

@@ -122,11 +122,12 @@ export default function PartnersContent() {
           </div>
 
           <HeroBannerRightPanel
+            beforeBadge="Awaiting Subscription"
             beforeLines={{
               line1:
-                "Realty Candy placed the script; subscribe to activate your dashboard and live metrics.",
+                "Your Premier partner has already added the Dream Neighborhood Explorer to your website",
               line2:
-                "Until you're subscribed, views and pages show as placeholders.",
+                "Once you have subscribed, views and pages will update showing increased website engagement",
             }}
           />
         </div>
