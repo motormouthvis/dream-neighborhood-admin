@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import {
   Users,
@@ -14,46 +14,53 @@ import {
   ExternalLink,
   Settings2,
   ChevronRight,
+  Sparkles,
+  Play,
+  CheckCircle2,
+  ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const benefits = [
   {
-    icon: <Globe className="w-4 h-4 text-emerald-600" />,
+    icon: <Globe className="w-4 h-4 text-emerald-700" />,
     title: "Better SEO",
     desc: "Neighborhood data boosts local search rankings.",
   },
   {
-    icon: <Eye className="w-4 h-4 text-emerald-600" />,
+    icon: <Eye className="w-4 h-4 text-emerald-700" />,
     title: "Website Engagement",
     desc: "Interactive popups keep buyers on your site longer.",
   },
   {
-    icon: <Users className="w-4 h-4 text-emerald-600" />,
+    icon: <Users className="w-4 h-4 text-emerald-700" />,
     title: "Higher Quality Leads",
     desc: "AI-qualified prospects convert at higher rates.",
   },
   {
-    icon: <Target className="w-4 h-4 text-emerald-600" />,
+    icon: <Target className="w-4 h-4 text-emerald-700" />,
     title: "Fewer Showings Per Closing",
     desc: "Data reduces unnecessary property tours.",
   },
   {
-    icon: <TrendingUp className="w-4 h-4 text-emerald-600" />,
+    icon: <TrendingUp className="w-4 h-4 text-emerald-700" />,
     title: "Faster Closings",
     desc: "Buyers make informed decisions, faster.",
   },
   {
-    icon: <Award className="w-4 h-4 text-emerald-600" />,
+    icon: <Award className="w-4 h-4 text-emerald-700" />,
     title: "Competitive Advantage",
     desc: "Stand out with premium tech buyers expect.",
   },
 ];
 
 export default function PartnersContent() {
+  const [videoPlaying, setVideoPlaying] = useState(false);
+
   return (
     <div className="max-w-6xl mx-auto">
+      {/* Page header */}
       <div className="mb-6">
         <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-3xl mb-2 text-xs font-medium">
           <Users className="w-3.5 h-3.5" /> PARTNER
@@ -62,14 +69,103 @@ export default function PartnersContent() {
           Realty Candy Partnership
         </h1>
         <p className="text-zinc-500 text-sm mt-1">
-          Your popup is already embedded by Realty Candy. Subscribe to unlock the full experience.
+          Your popup is already embedded by Realty Candy. Manage your subscription and
+          customize the experience below.
         </p>
       </div>
 
+      {/* HERO — Realty Candy partnership card */}
+      <div className="mb-5 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 shadow-xl shadow-emerald-900/25 ring-1 ring-emerald-900/10">
+        {/* Decorative dot grid */}
+        <div
+          className="absolute inset-0 opacity-15 pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "28px 28px",
+          }}
+        />
+        {/* Soft glows */}
+        <div className="absolute -top-24 -right-24 w-80 h-80 bg-emerald-300/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-400/15 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative grid md:grid-cols-2 gap-6 p-7 md:p-8">
+          {/* Left — Brand identity */}
+          <div className="flex flex-col">
+            <div className="inline-flex items-center gap-1.5 self-start bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase mb-4">
+              <Sparkles className="w-3 h-3" /> Premier Partner
+            </div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
+                🏠
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-white tracking-tight leading-none">
+                  Realty Candy
+                </div>
+                <div className="text-emerald-100/80 text-sm mt-1">Your website partner</div>
+              </div>
+            </div>
+            <p className="text-emerald-50/90 text-sm leading-relaxed mb-5">
+              The popup is already embedded on your site by Realty Candy. Subscribe to unlock
+              the explorer, AI lead qualification, reports, and all partner-exclusive
+              benefits.
+            </p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>Pre-installed — no scripts to copy</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>Priority support and onboarding</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-emerald-50">
+                <CheckCircle2 className="w-4 h-4 text-emerald-200 flex-shrink-0" />
+                <span>Updates go live automatically</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right — Live status + headline metric */}
+          <div className="flex flex-col justify-center bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-6 shadow-inner shadow-emerald-950/10">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-1.5 bg-emerald-400/15 border border-emerald-300/30 px-2.5 py-1 rounded-full">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-300"></span>
+                </span>
+                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-emerald-100">
+                  Popup is Live
+                </span>
+              </div>
+              <div className="mt-4 text-5xl font-bold text-white tracking-tight leading-none tabular-nums">
+                12,847
+              </div>
+              <div className="text-[11px] text-emerald-100/80 mt-2 font-semibold tracking-wider uppercase">
+                Total Views
+              </div>
+            </div>
+            <a
+              href="https://dreamneighborhood.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-6 w-full h-12 bg-white text-[#0A6B5F] hover:bg-emerald-50 text-base font-semibold rounded-xl shadow-lg shadow-emerald-950/30 transition-shadow hover:shadow-xl flex items-center justify-center gap-2"
+            >
+              View Live Popup <ArrowUpRight className="w-4 h-4" />
+            </a>
+            <div className="text-center mt-3 text-[11px] text-emerald-100/70">
+              Embedded by Realty Candy on your site
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="grid grid-cols-12 gap-5">
+        {/* COLUMN 1 — left, 7/12 */}
         <div className="col-span-12 lg:col-span-7 flex flex-col gap-5">
-          {/* Subscription status — TWO LINES */}
-          <Card className="border border-emerald-200 shadow-sm bg-gradient-to-r from-emerald-50/80 via-white to-emerald-50/50 overflow-hidden">
+          {/* Subscription status — clean, white */}
+          <Card className="bg-white border border-zinc-200 shadow-sm">
             <CardContent className="p-4 space-y-3">
               <div className="flex items-center gap-3 flex-wrap">
                 <div className="flex items-center gap-2">
@@ -79,19 +175,20 @@ export default function PartnersContent() {
                   </span>
                 </div>
                 <div className="text-xs text-zinc-500">Plan</div>
-                <div className="inline-flex bg-white border border-emerald-200 rounded-lg overflow-hidden text-[11px] font-medium">
+                <div className="inline-flex bg-zinc-50 border border-zinc-200 rounded-lg overflow-hidden text-[11px] font-medium">
                   <span className="px-2.5 py-1 text-zinc-500">Solo</span>
                   <span className="px-2.5 py-1 bg-emerald-600 text-white">Team</span>
                   <span className="px-2.5 py-1 text-zinc-500">Enterprise</span>
                 </div>
                 <Button
                   size="sm"
-                  className="ml-auto bg-emerald-600 hover:bg-emerald-700 text-xs h-8 rounded-lg px-4 font-medium shadow-sm"
+                  variant="outline"
+                  className="ml-auto text-xs h-8 rounded-lg px-4 font-medium border-emerald-200 text-emerald-700 hover:bg-emerald-50"
                 >
                   Manage Subscription
                 </Button>
               </div>
-              <div className="flex items-center gap-5 text-xs text-zinc-600 border-t border-emerald-100/80 pt-3">
+              <div className="flex items-center gap-5 text-xs text-zinc-600 border-t border-zinc-100 pt-3">
                 <div>
                   <span className="text-zinc-400">Billing:</span>{" "}
                   <span className="font-semibold text-zinc-900">Monthly</span>
@@ -108,38 +205,10 @@ export default function PartnersContent() {
             </CardContent>
           </Card>
 
-          {/* Realty Candy hero card */}
-          <Card className="border border-emerald-200 shadow-sm overflow-hidden">
-            <CardContent className="p-0">
-              <div className="bg-gradient-to-br from-emerald-100 via-emerald-50 to-teal-50 p-6 text-center">
-                <div className="w-14 h-14 mx-auto bg-white border border-emerald-200 rounded-2xl flex items-center justify-center text-3xl mb-3 shadow-sm">
-                  🏠
-                </div>
-                <div className="text-xs uppercase tracking-widest text-emerald-700 font-semibold">
-                  Premier Partner
-                </div>
-                <div className="text-2xl font-semibold text-zinc-900 mt-1">Realty Candy</div>
-                <div className="inline-flex items-center gap-2 mt-3 bg-white text-emerald-700 border border-emerald-200 text-xs px-4 py-1.5 rounded-3xl font-semibold shadow-sm">
-                  50% OFF FIRST MONTH
-                </div>
-              </div>
-              <div className="p-5">
-                <div className="text-sm text-zinc-700 mb-4">
-                  Your website partner has already embedded the Dream Neighborhood popup.
-                  Subscribe to unlock the explorer, AI lead qualification, reports, and all
-                  partner-exclusive benefits.
-                </div>
-                <Button className="w-full h-11 bg-emerald-600 hover:bg-emerald-700 text-base rounded-2xl">
-                  Subscribe Now
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Edit popup */}
-          <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-white to-emerald-50/40 overflow-hidden">
+          {/* Edit popup — secondary action, lifts on hover */}
+          <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
             <CardContent className="p-5 flex items-center gap-4">
-              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md">
+              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
                 <Settings2 className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
@@ -157,10 +226,10 @@ export default function PartnersContent() {
             </CardContent>
           </Card>
 
-          {/* Book a call — flex-1 to balance column heights */}
-          <Card className="border border-emerald-100 shadow-sm bg-gradient-to-br from-emerald-50 to-teal-50 overflow-hidden flex-1">
+          {/* Book a call — flex-1 to balance heights with column 2 */}
+          <Card className="bg-white border border-zinc-200 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all flex-1">
             <CardContent className="p-5 h-full flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md">
+              <div className="w-11 h-11 bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md shadow-emerald-500/25">
                 <Calendar className="w-5 h-5" />
               </div>
               <div className="flex-1 min-w-0">
@@ -183,31 +252,31 @@ export default function PartnersContent() {
           </Card>
         </div>
 
+        {/* COLUMN 2 — right, 5/12 */}
         <div className="col-span-12 lg:col-span-5 flex flex-col gap-5">
           {/* Benefits */}
-          <Card className="border-0 shadow-sm overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-emerald-50/30">
+          <Card className="border border-zinc-200 shadow-sm overflow-hidden bg-white">
             <CardContent className="p-5">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
-                    <Shield className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="text-sm font-semibold text-zinc-900">Subscription Benefits</div>
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-7 h-7 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center">
+                  <Shield className="w-3.5 h-3.5" />
                 </div>
-                <div className="text-right">
-                  <div className="text-[10px] text-emerald-700 uppercase tracking-wider font-semibold">
-                    Total Views To Date
+                <div>
+                  <div className="text-sm font-semibold text-zinc-900 leading-tight">
+                    Subscription Benefits
                   </div>
-                  <div className="text-2xl font-bold tracking-tight text-zinc-900">12,847</div>
+                  <div className="text-[11px] text-zinc-500 leading-tight">
+                    What you get with your Team plan
+                  </div>
                 </div>
               </div>
-              <div className="space-y-2.5">
+              <div className="space-y-2">
                 {benefits.map((b, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 p-3 rounded-xl bg-white/70 backdrop-blur-sm border border-emerald-100/60"
+                    className="flex items-start gap-3 p-3 rounded-xl bg-gradient-to-br from-emerald-50/40 to-white border border-emerald-100/60 hover:border-emerald-200 transition-colors"
                   >
-                    <div className="w-7 h-7 bg-emerald-100/80 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-7 h-7 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       {b.icon}
                     </div>
                     <div className="flex-1 min-w-0">
@@ -222,21 +291,49 @@ export default function PartnersContent() {
             </CardContent>
           </Card>
 
-          {/* Demo video */}
-          <Card className="border border-emerald-100 shadow-sm overflow-hidden flex-1 flex flex-col">
-            <div className="aspect-video bg-zinc-900 flex-shrink-0">
-              <iframe
-                src="https://www.youtube.com/embed/j01aKyHJ2E8?rel=0"
-                title="Dream Neighborhood Demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="w-full h-full"
-              />
+          {/* Demo video — branded thumbnail, defers iframe load until click */}
+          <Card className="border border-zinc-200 shadow-sm overflow-hidden flex-1 flex flex-col">
+            <div className="aspect-video relative bg-gradient-to-br from-[#0A6B5F] via-emerald-700 to-teal-800 flex-shrink-0">
+              {videoPlaying ? (
+                <iframe
+                  src="https://www.youtube.com/embed/j01aKyHJ2E8?rel=0&autoplay=1"
+                  title="Dream Neighborhood Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="w-full h-full"
+                />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setVideoPlaying(true)}
+                  className="absolute inset-0 group cursor-pointer"
+                  aria-label="Play demo video"
+                >
+                  <div
+                    className="absolute inset-0 opacity-20 pointer-events-none"
+                    style={{
+                      backgroundImage:
+                        "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                      backgroundSize: "20px 20px",
+                    }}
+                  />
+                  <div className="absolute top-1/4 left-1/3 w-40 h-40 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-teal-300/15 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-2xl shadow-emerald-950/40 ring-4 ring-white/20 group-hover:scale-110 group-hover:shadow-emerald-950/60 transition-all">
+                      <Play className="w-7 h-7 text-[#0A6B5F] fill-[#0A6B5F] ml-1" />
+                    </div>
+                    <div className="text-white font-semibold text-sm tracking-tight drop-shadow">
+                      Watch the 2-minute demo
+                    </div>
+                  </div>
+                </button>
+              )}
             </div>
-            <div className="p-4 flex items-center justify-between bg-gradient-to-r from-white to-emerald-50/30 flex-1">
+            <div className="p-4 flex items-center justify-between bg-white flex-1">
               <div>
-                <div className="font-semibold text-sm text-zinc-900">Watch Demo Video</div>
-                <div className="text-xs text-zinc-500">See Dream Neighborhood in action</div>
+                <div className="font-semibold text-sm text-zinc-900">See it in action</div>
+                <div className="text-xs text-zinc-500">A quick tour of Dream Neighborhood</div>
               </div>
               <a
                 href="https://youtu.be/j01aKyHJ2E8"
