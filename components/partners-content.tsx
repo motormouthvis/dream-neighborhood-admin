@@ -135,7 +135,7 @@ export default function PartnersContent() {
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-5">
+      <div className="grid grid-cols-12 gap-5 dn-dash-body">
         {/* COLUMN 1 — left, 7/12 */}
         <div className="col-span-12 lg:col-span-7 flex flex-col gap-5">
           {/* Subscription status — clean, white */}

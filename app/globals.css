@@ -129,6 +129,30 @@
   }
 }
 
+/* Content below dashboard hero: nudge type up for readability (hero unchanged) */
+@layer components {
+  .dn-dash-body {
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  .dn-dash-body .text-\[10px\] {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+  }
+  .dn-dash-body .text-\[11px\] {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .dn-dash-body .text-xs {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .dn-dash-body .text-sm {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+}
+
 @keyframes corner-arrow-nudge {
   0%,
   100% {
