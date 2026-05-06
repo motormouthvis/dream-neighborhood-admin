@@ -45,7 +45,8 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
   const pathname = usePathname();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [advancedOpen, setAdvancedOpen] = useState(
-    activeKey === "explorers" ||
+    activeKey === "example-explorer" ||
+      activeKey === "explorers" ||
       activeKey === "reports" ||
       activeKey === "leads" ||
       activeKey === "subscription" ||
@@ -151,16 +152,6 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
               Get Started
             </Link>
 
-            <Link
-              href={`${dashboardHref}/example-explorer`}
-              className={`w-full flex items-start gap-3 px-5 py-3 rounded-2xl text-left text-sm font-medium transition-colors ${
-                activeKey === "example-explorer" ? navActive : navInactive
-              }`}
-            >
-              <MapPin className="w-5 h-5 shrink-0 opacity-90 mt-0.5" />
-              <span className="leading-snug">View Example Neighborhood Explorer</span>
-            </Link>
-
             <button
               type="button"
               onClick={() => setAdvancedOpen(!advancedOpen)}
@@ -182,6 +173,15 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
                 >
                   <Globe className="w-4 h-4 shrink-0 opacity-90" />
                   Manage Explorers
+                </Link>
+                <Link
+                  href={`${dashboardHref}/example-explorer`}
+                  className={`${navLinkBase} items-start ${
+                    activeKey === "example-explorer" ? navActive : navInactive
+                  }`}
+                >
+                  <MapPin className="w-4 h-4 shrink-0 opacity-90 mt-0.5" />
+                  <span className="leading-snug">View Example Neighborhood Explorer</span>
                 </Link>
                 <Link
                   href={`${dashboardHref}/reports`}
