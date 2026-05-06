@@ -9,14 +9,13 @@ import {
   CreditCard,
   HelpCircle,
   Settings,
-  Search,
-  Bell,
   ChevronDown,
   LayoutDashboard,
   Menu,
   X,
   Globe,
   Funnel,
+  MapPin,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
@@ -33,6 +32,7 @@ type Props = {
   /** Which sidebar item should be highlighted as active */
   activeKey?:
     | "dashboard"
+    | "example-explorer"
     | "explorers"
     | "reports"
     | "leads"
@@ -148,7 +148,17 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
               }`}
             >
               <LayoutDashboard className="w-5 h-5 shrink-0 opacity-90" />
-              Popup Dashboard
+              Get Started
+            </Link>
+
+            <Link
+              href={`${dashboardHref}/example-explorer`}
+              className={`w-full flex items-start gap-3 px-5 py-3 rounded-2xl text-left text-sm font-medium transition-colors ${
+                activeKey === "example-explorer" ? navActive : navInactive
+              }`}
+            >
+              <MapPin className="w-5 h-5 shrink-0 opacity-90 mt-0.5" />
+              <span className="leading-snug">View Example Neighborhood Explorer</span>
             </Link>
 
             <button
@@ -234,7 +244,7 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
       {/* Main pane */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         <div className="h-16 border-b bg-white px-4 md:px-8 flex items-center justify-between shadow-sm gap-3">
-          <div className="flex items-center gap-2 md:gap-4 text-sm text-zinc-600 min-w-0 flex-1">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
             <button
               type="button"
               className="md:hidden shrink-0 p-2 -ml-1 rounded-xl text-zinc-600 hover:bg-zinc-100"
@@ -243,36 +253,27 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
             >
               <Menu className="w-6 h-6" />
             </button>
-            <div className="flex items-center gap-2 md:gap-4 min-w-0 overflow-hidden">
-              <span className="font-medium text-[#0d5c52] truncate max-w-[7.5rem] sm:max-w-[10rem] md:max-w-none shrink-0">
-                bill@motormouth.io
+            <nav
+              aria-label="Breadcrumb"
+              className="flex items-center gap-2 sm:gap-2.5 text-xs sm:text-sm min-w-0 font-medium text-blue-700"
+            >
+              <span className="truncate">Dream Neighborhood Realty Co</span>
+              <span className="text-zinc-300 shrink-0" aria-hidden>
+                &gt;
               </span>
-              <span className="text-zinc-300 shrink-0">›</span>
-              <span className="font-semibold text-zinc-900 truncate min-w-0">{pageTitle}</span>
-            </div>
+              <span className="truncate text-blue-700">{pageTitle}</span>
+            </nav>
           </div>
 
-          <div className="flex items-center gap-4 md:gap-8 shrink-0">
-            <div className="relative w-80 hidden md:block">
-              <Search className="absolute left-4 top-3 text-zinc-400 w-4 h-4" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="w-full bg-zinc-100 border-0 focus:bg-white pl-11 py-3 rounded-2xl text-sm"
-              />
-            </div>
-
-            <div className="flex items-center gap-4 md:gap-7 text-zinc-500">
-              <Bell className="w-5 h-5 cursor-pointer hover:text-zinc-700 transition-colors hidden md:block" />
-              <div className="flex items-center gap-3">
-                <Avatar className="h-8 w-8 ring-1 ring-[#0d5c52]/25">
-                  <AvatarFallback className="bg-[#d9f99d]/30 text-[#0d5c52] text-xs font-medium">
-                    WM
-                  </AvatarFallback>
-                </Avatar>
-                <div className="text-sm hidden md:block">William Miller</div>
-              </div>
-            </div>
+          <div className="flex items-center gap-3 shrink-0 text-sm text-zinc-700">
+            <Avatar className="h-8 w-8 ring-1 ring-[#0d5c52]/25">
+              <AvatarFallback className="bg-[#d9f99d]/30 text-[#0d5c52] text-xs font-medium">
+                WM
+              </AvatarFallback>
+            </Avatar>
+            <span className="hidden sm:inline truncate max-w-[10rem] md:max-w-[14rem]">
+              bill@motormouth.io
+            </span>
           </div>
         </div>
 
