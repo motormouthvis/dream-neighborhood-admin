@@ -428,7 +428,7 @@ export default function PopupSettingsForm() {
       </Card>
 
       {/* Bottom action bar */}
-      <div className="fixed bottom-0 left-72 right-0 bg-white/95 backdrop-blur border-t border-zinc-200 px-8 py-4 flex items-center justify-end gap-3 shadow-md">
+      <div className="fixed bottom-0 left-0 right-0 md:left-72 bg-white/95 backdrop-blur border-t border-zinc-200 px-4 md:px-8 py-4 flex items-center justify-end gap-3 shadow-md pb-[calc(1rem+env(safe-area-inset-bottom,0px))]">
         <Link
           href="/self-serve"
           className="text-sm text-zinc-700 hover:text-zinc-900 px-4 py-2"
