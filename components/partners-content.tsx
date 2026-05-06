@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   Users,
@@ -78,15 +79,19 @@ export default function PartnersContent() {
         <div className="relative grid md:grid-cols-2 gap-6 p-7 md:p-8">
           {/* Left — Brand identity */}
           <div className="flex flex-col">
-            <div className="inline-flex items-center gap-1.5 self-start bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase mb-4">
-              <Sparkles className="w-3 h-3" /> Premier Partner
-            </div>
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl flex items-center justify-center text-3xl shadow-lg">
-                🏠
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4">
+              <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase shrink-0">
+                <Sparkles className="w-3 h-3 shrink-0" /> Premier Partner
               </div>
-              <div className="text-3xl font-bold text-white tracking-tight leading-none">
-                Realty Candy
+              <div className="relative h-10 sm:h-12 md:h-[52px] w-[200px] sm:w-[240px] md:w-[268px] shrink-0">
+                <Image
+                  src="/realty-candy-logo.png"
+                  alt="RealtyCandy"
+                  fill
+                  className="object-contain object-left"
+                  sizes="(max-width: 768px) 200px, 268px"
+                  priority
+                />
               </div>
             </div>
             <p className="text-emerald-50/90 text-sm leading-relaxed mb-4">
@@ -94,15 +99,12 @@ export default function PartnersContent() {
               unlock your exclusive benefits.
             </p>
             <div className="mb-5 rounded-2xl bg-white/12 backdrop-blur-sm border border-white/25 px-4 py-3.5 shadow-inner shadow-black/5">
-              <div className="text-[10px] font-bold tracking-[0.15em] uppercase text-emerald-100 mb-1.5">
-                Exclusive Realty Candy offer
+              <div className="text-[10px] font-bold tracking-[0.12em] uppercase text-emerald-100 mb-1.5 leading-snug">
+                Exclusive Realty Candy offer - Try for as little as $19.50
               </div>
               <p className="text-sm text-white font-medium leading-snug">
-                You&apos;re offered an exclusive <span className="text-emerald-100">50% off</span> your
-                first month — <span className="font-semibold">only $19 to try it for 30 days</span>.{" "}
-                <span className="text-emerald-50/90 font-normal">
-                  No long-term commitment; cancel anytime.
-                </span>
+                50% off your first purchase monthly or annual plan— No long-term commitment;
+                cancel anytime.
               </p>
             </div>
             <div className="space-y-2">
