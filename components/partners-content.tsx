@@ -80,9 +80,6 @@ export default function PartnersContent() {
           {/* Left — Brand identity */}
           <div className="flex flex-col">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4">
-              <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase shrink-0">
-                <Sparkles className="w-3 h-3 shrink-0" /> Premier Partner
-              </div>
               <div className="relative h-10 sm:h-12 md:h-[52px] w-[200px] sm:w-[240px] md:w-[268px] shrink-0">
                 <Image
                   src="/realty-candy-logo.png"
@@ -93,6 +90,9 @@ export default function PartnersContent() {
                   priority
                 />
               </div>
+              <div className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm border border-white/25 px-2.5 py-1 rounded-full text-[11px] text-white font-semibold tracking-widest uppercase shrink-0">
+                <Sparkles className="w-3 h-3 shrink-0" /> Premier Partner
+              </div>
             </div>
             <p className="text-emerald-50/90 text-sm leading-relaxed mb-4">
               The popup is already installed on your site by Realty Candy. Subscribe to
@@ -100,11 +100,12 @@ export default function PartnersContent() {
             </p>
             <div className="mb-5 rounded-2xl bg-white/12 backdrop-blur-sm border border-white/25 px-4 py-3.5 shadow-inner shadow-black/5">
               <div className="text-[10px] font-bold tracking-[0.12em] uppercase text-emerald-100 mb-1.5 leading-snug">
-                Exclusive Realty Candy offer - Try for as little as $19.50
+                Exclusive Realty Candy offer - Try for as little as $19.50!
               </div>
               <p className="text-sm text-white font-medium leading-snug">
-                50% off your first purchase monthly or annual plan— No long-term commitment;
-                cancel anytime.
+                50% off your first monthly or annual plan purchase.
+                <br />
+                No long-term commitment; cancel anytime.
               </p>
             </div>
             <div className="space-y-2">
