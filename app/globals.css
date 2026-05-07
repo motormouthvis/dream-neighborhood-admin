@@ -162,3 +162,14 @@
     transform: translate(4px, 4px);
   }
 }
+
+/* Dream Neighborhood iframe embed — example explorer preview */
+.neighborhood-iframe {
+  height: 720px; /* default for mobile */
+}
+
+@media (min-width: 768px) {
+  .neighborhood-iframe {
+    height: 750px; /* tablets and larger */
+  }
+}
