@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function PopupSettingsPage() {
   return (
-    <DnShell pageTitle="Popup Settings" activeKey="dashboard">
+    <DnShell pageTitle="Customize Popup" activeKey="dashboard">
       <PopupSettingsForm />
     </DnShell>
   );
