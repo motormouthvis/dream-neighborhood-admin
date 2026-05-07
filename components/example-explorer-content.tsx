@@ -23,8 +23,10 @@ export default function ExampleExplorerContent() {
               View Example Neighborhood Explorer
             </h2>
             <p className="text-sm text-zinc-600 mt-1 leading-relaxed">
-              Browse the live widget below—the same Neighborhood Explorer buyers use before
-              and after touring a property on your website.
+              Browse the live Neighborhood Explorer below. You can embed this explorer on
+              any page, such as a Neighborhood Page on your website, or install our easy to use
+              Popup with only one line of code for your whole site. Click on the bottom right
+              floating widget to try it out the Popup.
             </p>
           </div>
         </div>
