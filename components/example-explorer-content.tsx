@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { MapPin, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -9,9 +8,6 @@ import { Card, CardContent } from "@/components/ui/card";
 const EXAMPLE_EXPLORER_URL = "https://dreamneighborhood.com";
 
 export default function ExampleExplorerContent() {
-  const pathname = usePathname();
-  const dashboardHref = pathname?.startsWith("/partners") ? "/partners" : "/self-serve";
-
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-start gap-3">
@@ -46,10 +42,10 @@ export default function ExampleExplorerContent() {
               Open example explorer <ExternalLink className="w-4 h-4" />
             </a>
             <Link
-              href={dashboardHref}
+              href="/popup-settings"
               className="inline-flex items-center justify-center rounded-xl border border-[#0d5c52]/30 bg-white text-[#0d5c52] text-sm font-medium h-9 px-4 hover:bg-[#0d5c52]/5 transition-colors"
             >
-              Back to Get Started
+              Back to Popup Settings
             </Link>
           </div>
         </CardContent>

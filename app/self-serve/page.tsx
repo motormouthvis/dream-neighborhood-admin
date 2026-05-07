@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function SelfServePage() {
   return (
-    <DnShell pageTitle="Get Started" activeKey="dashboard">
+    <DnShell pageTitle="Installation" activeKey="dashboard">
       <SelfServeContent />
     </DnShell>
   );
