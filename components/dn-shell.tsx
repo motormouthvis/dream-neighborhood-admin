@@ -149,7 +149,7 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
               }`}
             >
               <LayoutDashboard className="w-5 h-5 shrink-0 opacity-90" />
-              Get Started
+              Popup Settings
             </Link>
 
             <button
