@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function PartnersPage() {
   return (
-    <DnShell pageTitle="Popup Settings" activeKey="dashboard">
+    <DnShell pageTitle="Home" activeKey="dashboard">
       <PartnersContent />
     </DnShell>
   );

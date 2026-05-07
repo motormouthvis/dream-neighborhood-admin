@@ -10,7 +10,7 @@ import {
   HelpCircle,
   Settings,
   ChevronDown,
-  LayoutDashboard,
+  Home as HomeIcon,
   Menu,
   X,
   Globe,
@@ -18,6 +18,9 @@ import {
   MapPin,
 } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
+const ADVANCED_ROUTE_RE =
+  /\/(explorers|example-explorer|reports|leads|subscription|team-settings)(\/|$)/;
 
 const SIDEBAR_BG = "#0d5c52";
 const navLinkBase =
@@ -59,6 +62,13 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
 
   useEffect(() => {
     setMobileNavOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const p = pathname ?? "";
+    if (ADVANCED_ROUTE_RE.test(p)) {
+      setAdvancedOpen(true);
+    }
   }, [pathname]);
 
   useEffect(() => {
@@ -148,8 +158,8 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
                 activeKey === "dashboard" ? navActive : navInactive
               }`}
             >
-              <LayoutDashboard className="w-5 h-5 shrink-0 opacity-90" />
-              Popup Settings
+              <HomeIcon className="w-5 h-5 shrink-0 opacity-90" />
+              Home
             </Link>
 
             <button
@@ -190,7 +200,7 @@ export default function DnShell({ pageTitle, activeKey = "dashboard", children }
                   }`}
                 >
                   <FileText className="w-4 h-4 shrink-0 opacity-90" />
-                  Reports
+                  Manage Reports
                 </Link>
                 <Link
                   href={`${dashboardHref}/leads`}

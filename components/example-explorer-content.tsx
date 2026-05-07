@@ -49,7 +49,7 @@ export default function ExampleExplorerContent() {
               href={dashboardHref}
               className="inline-flex items-center justify-center rounded-xl border border-[#0d5c52]/30 bg-white text-[#0d5c52] text-sm font-medium h-9 px-4 hover:bg-[#0d5c52]/5 transition-colors"
             >
-              Back to Popup Settings
+              Back to Home
             </Link>
           </div>
         </CardContent>
